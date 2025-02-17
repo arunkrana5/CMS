@@ -1,0 +1,50 @@
+﻿@model IList<Banner.Web>
+
+
+@if (Model != null)
+{
+    <div id="demo" class="carousel slide" data-ride="carousel" data-interval="2000">
+
+        <div class="carousel-inner">
+            @{
+                int count = 0;
+                string InnerHtml = "<ol class='carousel-indicators'>";
+            }
+            @foreach (Banner.Web item in Model)
+            {
+                InnerHtml += "<li data-target='#demo' data-slide-to='" + count + "' class=" + (count == 0 ? "active" : "") + "></li>";
+                count++;
+                <div class="carousel-item @(count == 1 ? "active" : "")">
+                    <a class="link1" target="@item.Target" href="@(item.GoToURL)">
+                        <img src="@item.BannerURL" class="img-responsive" />
+                        @if (!string.IsNullOrEmpty(item.Heading))
+                        {
+                            <div class="banner-content">
+                                <h3>@item.Heading</h3>
+                                @if (!string.IsNullOrEmpty(item.SubHeading))
+                                {
+                                    <p>@item.SubHeading </p>
+                                }
+                            </div>
+
+
+                        }
+
+                    </a>
+                </div>
+            }
+
+        </div>
+        @Html.Raw(InnerHtml + "</ol>")
+
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+}
+
+
+

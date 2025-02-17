@@ -1,0 +1,9 @@
+﻿@model List<Blog.Web>
+
+<div class="container">
+    <div class="page-inr">
+        <h1 class="heading-main">@Model.Select(x => x.TypeName).FirstOrDefault()</h1>
+        @Html.Partial("~/Views/Home/_BlogList.cshtml", Model)
+    </div>
+</div>
+

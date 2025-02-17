@@ -1,0 +1,81 @@
+﻿@model IList<Gallery.Web>
+
+@{ 
+	string DesignKey = "Design" + clsApplicationSetting.GetWebConfigValue("DesignKey");
+}
+	<section class="inner-banner gallary-banner module parallax parallax-1" style="background-image: url(/assets/@DesignKey/images/gallary-bg.jpg);">
+		<div class="container">
+			<h3 class="cont">Gallery</h3>
+		</div>
+	</section>
+
+<div class="gry-bg ">
+	<div class="container pb-5 mb-5 ">
+		<div class="row gry-mb799">
+
+			@foreach (Gallery.Web item in Model)
+			{
+				<div class="col-md-4">
+					<a href="@Url.Action("GalleryDetails","Home",new {GalleryGroupID= clsCommon.Encrypt(item.GalleryGroupID.ToString()) })">
+						<div id="superman" class="card grycard-dgn">
+							<div class="grycardmg-top grytop">
+								<img src="/assets/design/images/gallary/ballon.png">
+							</div>
+							<div class="card__image">
+								<img src="@item.ImageURL" class="shdhvr" alt="@item.Heading" />
+							</div>
+							<div class="card__heading">
+								<span class="small">@item.Heading</span>
+								<h2>@item.Description</h2>
+							</div>
+						</div>
+					</a>
+				</div>
+			}
+
+		</div>
+
+	</div>
+</div> 
+
+@section scripts    {
+
+
+<script type="text/javascript">
+  
+
+;(function ( $ ) {
+  //Make your content a heroe
+  $.fn.tilt = function() {
+      //Variables
+      var perspective = '500px',
+      delta = 20,
+      width = this.width(),
+      height = this.height(),
+      midWidth = width / 2,
+      midHeight = height / 2;
+      //Events
+      this.on({
+        mousemove: function(e) {
+          var pos = $(this).offset(),
+          cursPosX = e.pageX - pos.left,
+          cursPosY = e.pageY - pos.top,
+          cursCenterX = midWidth - cursPosX,
+          cursCenterY = midHeight - cursPosY;
+
+          $(this).css('transform','perspective(' + perspective + ') rotateX('+ (cursCenterY / delta) +'deg) rotateY('+ -(cursCenterX / delta) +'deg)');
+          $(this).removeClass('is-out');
+        },
+        mouseleave: function() {
+          $(this).addClass('is-out');
+        }
+      });
+      //Return
+      return this;
+  };
+}( jQuery ));
+
+//Set plugin on cards
+$('.card').tilt();
+</script>
+}

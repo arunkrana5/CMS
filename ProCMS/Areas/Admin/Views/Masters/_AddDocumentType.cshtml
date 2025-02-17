@@ -1,0 +1,54 @@
+﻿
+@model DocumentType.Add
+
+@using (Ajax.BeginForm("_AddDocumentType", "Masters",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "_AddDocumentTypeForm" })
+    )
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => Model.DocTypeID)
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Type Name<sup>*</sup></label>
+        @if (Model.DocTypeID > 0)
+        {
+            @Html.TextBoxFor(model => model.DocTypeName, new { @class = "form-control", @readonly = "true" })
+        }
+        else
+        {
+            @Html.TextBoxFor(model => model.DocTypeName, new { @class = "form-control" })
+        }
+
+        @Html.ValidationMessageFor(model => model.DocTypeName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+        <label>Display Name<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.DisplayName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.DisplayName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+        <label>Priority<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+    </div>
+
+   
+</div>
+    <div class="row">
+
+        @if (Model.DocTypeID > 0)
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+        }
+    </div>
+
+}
+
+

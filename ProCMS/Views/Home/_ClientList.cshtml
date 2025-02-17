@@ -1,0 +1,26 @@
+﻿
+@model IList<Client.Web>
+
+
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-2 col-md-2 col-xs-6 clt">
+            <div class="client">
+                <img src="@item.ImageUrl" alt="@item.FullName">
+            </div>
+        </div>
+    }
+
+    @*<div class="col-md-12 mt-3">
+        <div class="logo-showcase">
+            <div class="owl-carousel slider" id="logo-slider">
+                @foreach (var item in Model)
+                {
+                    <div class="item">
+                        <img class="wp-post-image" src="@item.ImageUrl" alt="@item.FullName">
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>*@

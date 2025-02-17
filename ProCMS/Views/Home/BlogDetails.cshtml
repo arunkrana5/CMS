@@ -1,0 +1,224 @@
+﻿@model Blog.Details
+
+@{
+    string ShowTagsInDetailPage = "", ShowAuthorsInDetailPage = "", ShowDateInDetailPage = "";
+    ShowTagsInDetailPage = clsApplicationSetting.GetConfigValue("ShowTagsInDetailPage");
+    ShowAuthorsInDetailPage = clsApplicationSetting.GetConfigValue("ShowAuthorsInDetailPage");
+    ShowDateInDetailPage = clsApplicationSetting.GetConfigValue("ShowDateInDetailPage");
+
+}
+<input type="hidden" class="hdnBlogID" value="@clsCommon.Encrypt(Model.BlogID.ToString())" />
+<div class="container">
+<div class="row">
+    <div class="col-md-12">
+        <div class="article-banner">
+            @if (Model.AllTags.Count > 0 && ShowTagsInDetailPage == "Y")
+            {
+            <ul class="list-unstyled inline-style inline-style-center">
+                @foreach (var itemss in Model.AllTags)
+                {
+                    <li>
+                        <a href="@("/" + Model.TypeURL + "-Tags/" + itemss.URL)">@itemss.Name</a>
+                    </li>
+
+                }
+            </ul>
+            }
+            @if (Model.PublishedDate.Year > 1900 && ShowDateInDetailPage == "Y")
+            {
+                <span class="heading-sub">
+                    <a href="@("/" + Model.TypeURL + "-Date/" + Model.PublishedDate.ToString("dd-MMM-yyyy"))">  @Model.PublishedDate.ToString("dd-MMM-yyyy")</a>
+                </span>
+            }
+            <h1 class="heading-m text-center">
+                @Model.Heading
+            </h1>
+            
+            <img src="@Model.DetailImageURL" class="img-responsive" />
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="article-contain">
+            @Html.Raw(Model.Description)
+        </div>
+        <div class="likebtn">
+            <a class="btnLike"> <i class="btnlikei far fa-thumbs-up inactive"></i> <span>Like the Post</span></a>
+            ( <span class="spnLikeCount "> @Model.LikeCount</span>  likes )
+        </div>
+
+        <div class="articlebottom">
+            <ul class="nextsteplist inline  list-unstyled mt-3">
+                <li>
+                    @Html.CreateNavigation("blog", "back", Model.BlogID.ToString(), "Previous Post", "", "", "fas fa-arrow-left", "")
+
+                </li>
+                <li class="float-right">
+                    @Html.CreateNavigation("blog", "next", Model.BlogID.ToString(), "Next Post", "", "", "fas fa-arrow-right", "")
+                </li>
+            </ul>
+
+            <div class="share">
+                @Html.Partial("_SocialMediaShare")
+            </div>
+        </div>
+
+        <div class="commet-dgn">
+            <h3 class="heading-20">Leave a Comment</h3>
+            <div class="CommentAdddiv">
+                @{ Html.RenderAction("AddComment", "Blog", new { TableID = clsCommon.Encrypt(Model.BlogID.ToString()) }); }
+            </div>
+        </div>
+
+        <div class="CommentListdiv">
+            @{ Html.RenderAction("CommentList", "Blog", new { TableID = clsCommon.Encrypt(Model.BlogID.ToString()) });}
+        </div>
+
+    </div>
+    <div class="col-md-4">
+
+        <div class="card p-13 text-center mb-4">
+            @Html.Partial("~/Views/Home/_ExternalLinks.cshtml",Model.ExternalLinksList)
+        </div>
+
+        @Html.Partial("~/Views/Home/_AllTags.cshtml", Model.AllTags)
+
+        @Html.Partial("~/Views/Home/_BlogAdvance.cshtml", Model.BlogList)
+
+    </div>
+</div>
+</div>
+
+@section scripts    {
+    @Html.IncludeVersionedJs("js/jquery.unobtrusive-ajax.min.js")
+    @Html.IncludeVersionedJs("js/jquery.validate.min.js")
+    @Html.IncludeVersionedJs("js/jquery.validate.unobtrusive.min.js")
+   
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script type="text/javascript">
+
+        (function () {
+
+            var shareButtons = document.querySelectorAll(".share-btn");
+
+            if (shareButtons) {
+                [].forEach.call(shareButtons, function (button) {
+                    button.addEventListener("click", function (event) {
+                        var width = 650,
+                            height = 450;
+
+                        event.preventDefault();
+
+                        window.open(this.href, 'Share Dialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,width=' + width + ',height=' + height + ',top=' + (screen.height / 2 - height / 2) + ',left=' + (screen.width / 2 - width / 2));
+                    });
+                });
+            }
+
+        })();
+
+    </script>
+    <script>
+
+        $('.btnwatsup').on('click', function () {
+            var data = $(this).data();
+            LinkWhastapp(data);
+        })
+        function LinkWhastapp(data) {
+            var message = data.caption + " " + data.link;
+            window.open('https://wa.me/?text=' + message);
+        }
+
+
+
+        $('.btnLike').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if ($(".btnlikei").hasClass('inactive')) {
+                var a = $(".hdnBlogID").val();
+                $.ajax({
+                    url: "/SetLikeJson/" + a,
+                    type: "Get",
+                    success: function (objsss) {
+                        if (objsss.Status) {
+                            $(".spnLikeCount").html(objsss.AdditionalMessage);
+                            $(".btnlikei").removeClass('inactive').addClass('active');
+                        }
+                    }
+                });
+            }
+
+
+        });
+
+        function BindTarget(args) {
+			if (args.Status) {
+				SuccessToaster(args.SuccessMessage, '');
+                GetCommentList();
+				GetAddComment();
+				
+            }
+            else {
+                swal(args.SuccessMessage, '');
+            }
+        }
+
+        function GetAddComment() {
+            var a = $(".hdnBlogID").val();
+            $.ajax({
+                url: "/AddComment/" + a,
+                type: "Get",
+                success: function (objsss) {
+                    $(".CommentAdddiv").empty();
+                    $(".CommentAdddiv").html(objsss);
+                    var form = $("form")
+                        .removeData("validator")
+                        .removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse(form);
+                }
+            });
+        }
+
+        function GetCommentList() {
+            var a = $(".hdnBlogID").val();
+            $.ajax({
+                url: "/CommentList/" + a,
+                type: "Get",
+                success: function (objsss) {
+                    $(".CommentListdiv").empty();
+                    $(".CommentListdiv").html(objsss);
+                    $('#commentModal').modal('hide');
+                    var LastTRCount = Number($('.CommentListdiv').find("ul li").length);
+                    $(".spnCommentCount").html(LastTRCount)
+
+                }
+            });
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        (function ($) {
+            $(document).ready(function () {
+
+                var strArray = [];
+                $('.check-input').each(function () {
+                    $(this).on('change', function () {
+                        if ($(this).is(':checked')) {
+                            strArray.push($(this).val());
+                            $('#check-values').val(strArray.toString());
+                        } else {
+                            var index = strArray.indexOf($(this).val());
+                            if (index > -1) {
+                                strArray.splice(index, 1);
+                            }
+                            $('#check-values').val(strArray.toString());
+                        }
+                    });
+                });
+
+            });
+        })(jQuery);
+
+        $('[data-toggle="tooltip"]').tooltip();
+    </script>
+
+}

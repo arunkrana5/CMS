@@ -1,0 +1,16 @@
+﻿@model IList<FAQ.Web>
+
+<div class="bg-contain">
+    <h1 class="heading-m text-center">Frequently Asked Questions</h1>
+    <ul class="list-unstyled inlinelink">
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="/FAQDetail/@item.FAQURL">
+                    @item.Question
+                </a>
+            </li>
+        }
+
+    </ul>
+</div>

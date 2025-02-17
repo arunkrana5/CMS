@@ -1,0 +1,52 @@
+﻿
+@model MasterAll.Admin.Add
+
+@using (Ajax.BeginForm("SaveMasterAll", "Masters",
+        new { src = clsCommon.Encrypt(ViewBag.MenuID + "*" + "/Admin/Masters/SaveMasterAll*" + ViewBag.ID) },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "SaveMasterAllForm" })
+    )
+{
+    
+    @Html.HiddenFor(x => Model.ID)
+    @Html.HiddenFor(x => Model.table_name)
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>State <sup>*</sup></label>
+        @Html.DropDownListFor(n => n.group_id, new SelectList(ViewBag.List, "ID", "field_name", Model.group_id), "Select",
+                               new { @class = "form-control  applyselect" })
+        @Html.ValidationMessageFor(model => model.group_id, "", new { @class = "text-danger" })
+
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Name<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.field_name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.field_name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Code<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.field_value, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.field_value, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Priority<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+    </div>
+
+</div>
+
+    <div class="row">
+
+        @if (Model.ID > 0)
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+        }
+    </div>
+}
+

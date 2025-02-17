@@ -1,0 +1,35 @@
+﻿@model IList<ExternalLinks.Web>
+
+
+<h2 class="card-heading text-left">
+	@Html.CreateImage("heart-icon.png", "heart-icon", "headingicon")
+</h2>
+    <ul class="list-unstyled">
+        @foreach (var item in Model)
+        {
+            <li class="worldview-list d-flex align-items-center">
+                <a href="@item.LinkURL" target="_blank">
+                   <img src="@item.ImageURL" />
+                </a>
+                <div class="worldview-text">
+                    <a href="@item.LinkURL" target="_blank">
+                        @item.LinkName
+                    </a>
+                    <div class="linkarow">
+                        <a href="@item.LinkURL" target="_blank">
+                            <i class="fas fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+	
+	<div class="card-link text-right mr-12">
+                                <a href="/worldview-on-safe-sex" class="article-Button">
+                                    View All <i class="fas fa-angle-right">
+                                    </i>
+                                </a>
+                            </div>
+
+

@@ -1,0 +1,103 @@
+﻿@model Client.Admin.Add
+<div class="page-title">
+    <div class="title_left">
+        <h3>Client Details</h3>
+    </div>
+</div>
+
+<div class="x_panel">
+
+    @using (Ajax.BeginForm("ClientAdd", "Masters",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "ClientAddForm", enctype = "multipart/form-data" })
+    )
+    {
+        <div class="row">
+            @if (Model.ClientID > 0)
+            {
+                <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+                    <label>Client Code<sup>*</sup></label>
+                    @Html.TextBoxFor(model => model.ClientCode, new { @class = "form-control",@readonly= "readonly" })
+                    @Html.ValidationMessageFor(model => model.ClientCode, "", new { @class = "text-danger" })
+                </div>
+            }
+            <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+                <label>Full Name<sup>*</sup></label>
+                @Html.TextBoxFor(model => model.FullName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+                <label>Office Phone<sup>*</sup></label>
+                @Html.TextBoxFor(model => model.OfficePhone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.OfficePhone, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+                <label>Mobile No<sup>*</sup></label>
+                @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 form-group">
+                <label>GSTNo<sup>*</sup></label>
+                @Html.TextBoxFor(model => model.GSTNo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GSTNo, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                <label>Address <sup>*</sup></label>
+                @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+                <label>Image URL</label>
+
+                @Html.TextBoxFor(model => model.ImageUrl, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+                <label>Choose Image<sup>*</sup></label>
+                <a class="btn-slt" onclick="DocumentList(0)"><strong>Select Image <i class="fa fa-file"></i></strong> </a>
+            </div>
+
+            <div class="col-md-6 form-group">
+                @Html.HiddenFor(model => model.DocID, new { @class = "hdnselectedDoc_0" })
+                <img src="@Model.DocURL" class="ImgselectedURL_0 detailimage" />
+            </div>
+        </div>
+
+        <div class="row">
+
+            @if (Model.ClientID > 0)
+            {
+                <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+            }
+            else
+            {
+                <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+            }
+            <button type="button" class="btn cnl-btn ripplelink  pull-right" onclick="ShowLoadingDialog(); window.location = '@Url.Action("ClientList",new { src = clsCommon.Encrypt(ViewBag.MenuID+"*"+"/Admin/Masters/ClientList") })';"><i class="fa fa-times"></i> Cancel</button>
+
+        </div>
+
+    }
+
+</div>
+
+@section scripts    {
+    <script>
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.href = obj.RedirectURL;
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+    </script>
+}

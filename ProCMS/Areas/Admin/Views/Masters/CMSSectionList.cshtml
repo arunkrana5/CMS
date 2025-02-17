@@ -1,0 +1,182 @@
+﻿
+@model IList<CMSSection.List>
+
+@{
+    string DesignKey = "design" + clsApplicationSetting.GetWebConfigValue("DesignKey") + "/";
+    string Prefix = "/Areas/Admin/assets/";
+}
+
+@section style{
+    @Html.IncludeVersionedCss(Url.Content(Prefix + "vendors/datatables/dataTables.bootstrap4.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + "vendors/datatables/buttons.bootstrap4.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + "vendors/datatables/responsive.bootstrap4.min.css"))
+}
+
+<div>
+    @Html.Partial("ListHeader_Partial", "CMS Section List")
+    <button type="button" class="btn cnl-btn ripplelink  pull-right" onclick="ShowLoadingDialog(); window.location = '@Url.Action("CMSList",new { src = clsCommon.Encrypt(ViewBag.MenuID+"*"+"/Admin/Masters/CMSList") })';"><i class="fas fa-times"></i> Cancel</button>
+
+
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="card p-0">
+                <div class="card-body p-0">
+
+                    <div class="x_content table-currency">
+                        <div class="table-responsive">
+                            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap tbltick new_width" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>S.no.</th>
+                                        <th>Action</th>
+                                        <th>Priority</th>
+                                        <th>Section Name</th>
+
+                                        <th>Inserted Date</th>
+                                        <th>Updated Date</th>
+                                        <th>IP Address</th>
+                                    </tr>
+                                    <tr class="searchbar">
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th> </th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ int Count = 0;}
+                                    @foreach (CMSSection.List item in Model)
+                                    {
+                                        Count++;
+                                    <tr class="@(item.IsActive == true?"": "trrowred")">
+                                        <td>@Count</td>
+                                        <td>
+                                            <input type="hidden" name="I" value="@item.CMSSectionID" />
+                                            <input type="hidden" name="N" value="@item.SectionName" />
+                                        
+
+                                            @if (clsApplicationSetting.GetSessionValue("Modify") == "True")
+                                            {
+                                                @Html.Raw(item.IsActive == true
+                                          ? "<a  data-toggle='tooltip' data-original-title='Click to DeActivate' list='CMSSection_IsActive' OP='0' class='AIsActive' > <i class='fa fa-check-circle checkgreen' aria-hidden='true'></i></a>"
+                                          : "<a data-toggle='tooltip' data-original-title='Click to Activate' list='CMSSection_IsActive' OP='1'  class='AIsActive' > <i class='fa fa-times-circle crossred' aria-hidden='true'></i></a>")
+
+
+
+                                                <a title="Edit" onclick="ListHeaderAdd(this);" data-toggle='tooltip'> <i class="fa fa-pencil-square-o checkgreen" aria-hidden="true"></i> </a>
+                                            }
+
+                                        </td>
+                                        <td>
+
+                                            @Html.Raw(clsApplicationSetting.GetSessionValue("Modify") == "True" ? "<input type='number' class='listpriority' list='CMSSection_priority' value=\"" + item.Priority + "\" />" : item.Priority.ToString())
+                                        </td>
+                                        <td> @item.SectionName</td>
+                                        <td>@item.createdat</td>
+                                        <td>@item.modifiedat</td>
+                                        <td>@item.IPAddress</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade pop-dgn" id="ViewModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header blk-gdn-btn">
+                <h4 class="modal-title"><i class="fas fa-print"></i>Add Section </h4>
+                <div class="close" data-dismiss="modal">&times;</div>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="TagetDiv"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts    {
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/jquery.dataTables.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/dataTables.bootstrap4.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/dataTables.buttons.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.bootstrap4.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/jszip.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/pdfmake.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/vfs_fonts.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.html5.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.print.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.colVis.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "scripts/ListSetting.js"))
+
+  
+    @Html.IncludeVersionedJs(Url.Content("~/ckeditor/ckeditor.js"))
+    
+<script>
+
+        function ListHeaderAdd(obj ) {
+            var CMSSectionID = $(obj).closest("tr").find("input:hidden[name=I]").val();
+            if (CMSSectionID == undefined)
+        {
+                CMSSectionID = 0;
+        }
+			$.ajax({
+                url: "/Admin/Masters/_AddCMSSection",
+				type: "Get",
+                data: { src: EncryptQueryStringJSON(@ViewBag.MenuID+"*" + "/Admin/Masters/_AddCMSSection" + "*" + CMSSectionID + "*" + @ViewBag.CMSID) },
+                success: function (data)
+                {
+					$("#TagetDiv").empty();
+                    $("#TagetDiv").html(data);
+                    $(".applyselect").select2();
+                    $('#ViewModal').modal({
+                        backdrop: 'static',
+                        keyboard: false
+                    });
+
+                    CKEDITOR.instances = new Array();
+                    CKEDITOR.replace("Content");
+                    
+
+                    $(".applyselect").select2();
+                     var form = $("form")
+                .removeData("validator")
+                .removeData("unobtrusiveValidation");
+                    $.validator.unobtrusive.parse(form);
+				},
+				error: function (er) {
+					alert(er);
+
+				}
+			});
+            }
+
+
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.href = obj.RedirectURL;
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+
+</script>
+}

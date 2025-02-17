@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+@{
+    string DesignKey = "design" + clsApplicationSetting.GetWebConfigValue("DesignKey") + "/";
+    string Prefix = "/Areas/Admin/assets/";
+
+    string Version = clsApplicationSetting.GetWebConfigValue("Version");
+    string PageName = clsApplicationSetting.GetPageName();
+
+    var Doctype = clsApplicationSetting.GetDocTypeList();
+
+}
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/Areas/assets/design@(DesignKey)/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/Areas/assets/design@(DesignKey)/images/favicon.png" type="image/png" sizes="50x50">
+
+
+    <title>@PageName </title>
+    <meta name="title" content="@PageName" />
+    <meta name="keywords" content="@PageName" />
+    <meta name="description" content="@PageName" />
+
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/bootstrap.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "fonts/css/font-awesome.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/animate.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + "css/select2.min.css"))
+    @RenderSection("style", required: false)
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/style.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/custom.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/responsive.css"))
+
+</head>
+<body class="nav-md">
+
+    <div id="dvMaskFullpage" style="display: none;">
+        <div class="page-loader-component">
+            <div class="lds-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container body">
+
+
+        <div class="main_container">
+
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+
+                    <div class="navbar nav_title text-center" style="border: 0;">
+                        <a href="/Admin/Dashboard" class="site_title">
+
+                            <span>@clsApplicationSetting.GetWebConfigValue("ProjectName")</span>
+                        </a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="profile">
+                        <div class="profile_pic">
+                            @Html.CreateImage("logo.png", "", "img-circle profile_img")
+
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>@clsApplicationSetting.GetSessionValue("UserName")</h2>
+                        </div>
+                    </div>
+                    <br />
+
+                    @Html.Partial("Menu_Partial");
+
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Lock">
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                        </a>
+                        <a href="/Logout" data-toggle="tooltip" data-placement="top" title="Logout">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="top_nav">
+
+                <div class="nav_menu">
+                    <nav class="" role="navigation">
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="navpt">
+                                <a href="/Admin/Logout" class="user-profile dropdown-toggle">
+                                    @Html.CreateImage("img.jpg", "", "")
+                                    Logout
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                            </li>
+
+                            <li role="presentation" class="dropdown navpt" style="display: none">
+                                <div class="NotificationDiv">
+                                    @*@{Html.RenderAction("_Notification", "Account"); }*@
+                                </div>
+                            </li>
+                            <li class="navpt"><a id="anhorStricky"><strong> Notes <i class="fa fa-sticky-note" aria-hidden="true"></i></strong></a></li>
+                            
+                            <li class="navpt"><a class="btnShowGallery"><i class="fa fa-image"></i></a></li>
+
+                            <li class="navpt"><strong><i class="fa fa-clock-o" aria-hidden="true"></i></strong> <span class="spnlivedate"></span></li>
+                            <li class="navpt"><strong>IP:</strong>@clsApplicationSetting.GetIPAddress()</li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+            <div class="right_col" role="main">
+                @RenderBody()
+                @Html.Partial("Footer_Partial")
+            </div>
+
+
+            <input type="hidden" id="MultipleCount" name="MultipleCount" value="0" />
+            <input type="hidden" id="hdnMenuID" name="hdnMenuID" value="@ViewBag.MenuID" />
+        </div>
+
+    </div>
+
+
+    <div class="modal fade pop-dgn" id="ModalStrickyNotes">
+        <div class="modal-dialog modal-md pop-dgn">
+            <div class="modal-content">
+                <div class="modal-header blk-gdn-btn">
+                    <h4 class="modal-title">@clsApplicationSetting.GetSessionValue("UserName") (Stricky Notes)</h4>
+                    <div class="close" data-dismiss="modal">&times;</div>
+                </div>
+                <div class="modal-body">
+                    <textarea cols="15" rows="15" id="txtStrickyNotes" class="form-control"></textarea>
+                </div>
+                <div class="pull-right">
+                    <img src="@Url.Content("/Areas/Admin/assets/design/images/loading.gif")" class="loadinggif" style="display:none" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade pop-dgn" id="ViewModal_Doc">
+        <div class="modal-dialog modal-lg pop-dgn">
+            <div class="modal-content">
+                <div class="modal-header blk-gdn-btn">
+                    <h4 class="modal-title">Documents Details </h4>
+                    <div class="close" data-dismiss="modal">&times;</div>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a class="btnAddDocument btn mtr-o-grn btn-l ripplelink pull-right"><i class="fa fa-paper-plane" aria-hidden="true"></i> Add</a>
+                        </div>
+                        <div class="col-md-6">
+                            <select id="ddDoctype" class="form-control applyselect">
+                                <option value="0">All</option>
+                                @foreach (var item in Doctype)
+                                {
+                                    <option value="@item.DocTypeID">@item.DisplayName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-4 form-group pull-right ">
+                            <input type="text" id="MySearchForDocument" class="form-control" onkeyup="SearchDocument()" placeholder="Search for names..">
+                        </div>
+                    </div>
+                    <div id="TagetDiv_Doc"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade pop-dgn" id="AddModal_Doc">
+        <div class="modal-dialog modal-lg pop-dgn">
+            <div class="modal-content">
+                <div class="modal-header blk-gdn-btn">
+                    <h4 class="modal-title">Add Documents</h4>
+                    <div class="close" data-dismiss="modal">&times;</div>
+                </div>
+                <div class="modal-body">
+                    <div id="TagetDiv_AddDoc"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast">
+        <div id="toasticon"><i></i></div>
+        <div id="toastMsg"></div>
+    </div>
+
+
+
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/jquery.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/bootstrap.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/custom.js"))
+
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/select2.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "scripts/CustomValidate.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "scripts/PushNotification.js"))
+
+
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/notify.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/sweetalert.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/wow.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "scripts/WorkingSetting.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "pagejs/DocumentMaster.js"))
+
+    @RenderSection("scripts", required: false)
+
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.unobtrusive-ajax.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.validate.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.validate.unobtrusive.min.js"))
+
+    <script>
+
+        $(document).ready(function () {
+                setInterval(function () {
+                    GetLiveTime();
+                }, 1000);
+
+                setInterval(function () {
+                    SessionEnd();
+                }, 10000);
+
+    var TS = '@TempData["Success"]';
+    var TSM = '@TempData["SuccessMsg"]';
+    if (TS == "Y") {
+        SuccessToaster(TSM);
+    }
+    if (TS == "N") {
+        FailToaster(TSM);
+    }
+});
+        function SessionEnd() {
+            $.ajax({
+                url: "/Admin/CommonAjax/IsSessionEndJSON",
+                type: "Post",
+                success: function (data) {
+                    if (data) {
+                        window.location = "/Admin/Logout";
+                    }
+                },
+                error: function (er) {
+                    window.location = "/Admin/Logout";
+                }
+            });
+        }
+
+        wow = new WOW();
+        wow.init();
+        $(".applyselect").select2();
+          $("#anhorStricky").click(function() {
+        GetStrickyNotes()
+        });
+
+        $("#txtStrickyNotes").on('keyup keypress', function (e) {
+            $(".loadinggif").show();
+            SetStrickyNotes();
+        });
+
+        function GetLiveTime() {
+            $.ajax({
+                    url: "/Admin/CommonAjax/GetDateTimeJson",
+                    type: "Post",
+                    async: true,
+                    success: function (data) {
+                       $(".spnlivedate").html(data);
+                    }
+            });
+        }
+
+        function GetStrickyNotes() {
+            $.ajax({
+                url: "/Admin/CommonAjax/GetStrickyNotesJson",
+                    type: "Get",
+                    async: true,
+                    success: function (data) {
+                            $("#txtStrickyNotes").val(data);
+                        $("#ModalStrickyNotes").modal('show');
+                    },
+                    error: function (er) {
+                        FailToaster(er);
+                    }
+            });
+        }
+        function SetStrickyNotes() {
+            $.ajax({
+                url: "/Admin/CommonAjax/SetStrickyNotesJson",
+                    type: "Post",
+                async: true,
+                 data: { StrickyNotes: $("#txtStrickyNotes").val() },
+                    success: function (data) {
+                           $(".loadinggif").hide();
+                    },
+                    error: function (er) {
+                        FailToaster(er);
+                    }
+            });
+        }
+    </script>
+    <script>
+        $(function () {
+            $('input[type=file]').change(function () {
+                var t = $(this).val();
+                var labelText = 'File : ' + t.substr(12, t.length);
+                $(this).prev('label').text(labelText);
+            })
+        });
+
+        function SuccessToaster(Message) {
+            $("#toastMsg").html(Message);
+            $("#toasticon i").addClass("fas fa-check");
+            var x = document.getElementById("toast")
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 4000);
+        }
+
+        function FailToaster(Message) {
+            $("#toastMsg").html(Message);
+            $("#toasticon i").addClass("fas fa-exclamation-triangle");
+            var x = document.getElementById("toast")
+            x.className = "show toaster-warning";
+            setTimeout(function () { x.className = x.className.replace("show toaster-warning", ""); }, 4000);
+        }
+
+        function OnPostFailure()
+        {
+            CloseLoadingDialog();
+            FailToaster('Something went wrong');
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+    <noscript>
+        <p class="NojavaScript">Javascripts is disabled</a></p>
+    </noscript>
+
+</body>
+</html>

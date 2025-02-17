@@ -1,0 +1,68 @@
+﻿
+
+@{
+    List<AdminModule> Modules = new List<AdminModule>();
+    List<AdminMenu> MainMenuModal = new List<AdminMenu>();
+
+    Modules = clsApplicationSetting.GetRoleWiseModuleList("");
+}
+
+
+
+<!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+    <div class="menu_section">
+        <input type="hidden" id="hdnForMenuID" value="@ViewBag.MenuID" />
+        <ul class="nav side-menu">
+
+            @foreach (AdminModule item in Modules)
+            {
+                <li>
+                    <a><i class="@item.ModuleIcon"></i> @item.ModuleName <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none">
+                        @foreach (AdminMenu itemMenu in item.MainMenuList.Where(x => x.ParentMenuID == 0).OrderBy(x => x.MenuPriority).ThenBy(x => x.MenuName).ToList())
+                        {
+                            if (itemMenu.IsChild == "Y")
+                            {
+                                <li>
+                                    <a>@itemMenu.MenuName <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        @foreach (AdminMenu itemMenu2 in itemMenu.ChildMenuList.OrderBy(x => x.MenuPriority).ThenBy(x => x.MenuName).ToList())
+                                        {
+                                            if (itemMenu2.IsChild == "Y")
+                                            {
+                                                <li class="@(ViewBag.MenuID==itemMenu.MenuID.ToString()?"current-page":"")">
+                                                    <a>@itemMenu.MenuName <span class="fa fa-chevron-down"></span></a>
+                                                    <ul class="nav child_menu" style="display: none">
+                                                    </ul>
+
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="@(ViewBag.MenuID==itemMenu2.MenuID.ToString()?"current-page":"")"><a id="Menu_@itemMenu2.MenuID" target="@itemMenu2.Target" onclick="@(!string.IsNullOrEmpty(itemMenu2.MenuURL) && itemMenu2.Target !="_blank" && itemMenu2.MenuURL!="javascripts:;"?"ShowLoadingDialog();":"")" href="@(itemMenu2.MenuURL+ "?src="+clsCommon.Encrypt(itemMenu2.MenuID.ToString()+"*"+itemMenu2.MenuURL))">@itemMenu2.MenuName</a></li>
+                                            }
+                                        }
+                                    </ul>
+
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="@(ViewBag.MenuID==itemMenu.MenuID.ToString()?"current-page":"")"><a id="Menu_@itemMenu.MenuID" target="@itemMenu.Target" onclick="@(!string.IsNullOrEmpty(itemMenu.MenuURL) && itemMenu.Target !="_blank" && itemMenu.MenuURL!="javascripts:;"?"ShowLoadingDialog();":"")" href="@(itemMenu.MenuURL+ "?src="+clsCommon.Encrypt(itemMenu.MenuID.ToString()+"*"+itemMenu.MenuURL))">@itemMenu.MenuName</a></li>
+                            }
+
+                        }
+                    </ul>
+
+                </li>
+            }
+
+
+        </ul>
+    </div>
+
+
+</div>
+<!-- /sidebar menu -->

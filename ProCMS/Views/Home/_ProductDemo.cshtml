@@ -1,0 +1,36 @@
+﻿@model ProductDemo
+
+
+@using (Ajax.BeginForm("_ProductDemo", "Home",
+    new AjaxOptions { HttpMethod = "POST", OnBegin = "ShowLoadingDialog", OnSuccess = "OnSuccess" },
+new { @id = "_ProductDemoFrom", @enctype = "multipart/form-data" })
+)
+{
+    @Html.HiddenFor(model => model.ProductID)
+
+    <h2 class="text-center">To Get A Free Demo </h2>
+    <p class="text-center">Please Fill The Below Form</p>
+
+    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Phone" })
+    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+
+    @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", @placeholder = "Phone" })
+    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+
+
+    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email" })
+    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+
+    @Html.TextAreaFor(model => model.Message, new { @class = "form-control", @placeholder = "Your Message" })
+    @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+
+
+    <center>
+        <button type="submit" name="Command" value="Add" class="submit-btn animatable bounceIn">Request a Demo <i class="fa fa-paper-plane" aria-hidden="true"></i> </button>
+    </center>
+
+
+}

@@ -1,0 +1,46 @@
+﻿@model Document.Add
+@{
+    string DesignKey = "design" + clsApplicationSetting.GetWebConfigValue("DesignKey") + "/";
+    string Prefix = "/Areas/Admin/assets/";
+}
+
+@using (Ajax.BeginForm("_AddDocument", "Index",
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnAddDocSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "_AddDocumentForm", enctype = "multipart/form-data" })
+    )
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <small class="docWaringImg">
+                @clsApplicationSetting.GetWebConfigValue("AllowedImage_Ext") must be less than @clsApplicationSetting.AllowedFileSize("Images")
+                <br />
+                @clsApplicationSetting.GetWebConfigValue("AllowedFile_Ext")  must be less than @clsApplicationSetting.AllowedFileSize("File")
+            </small>
+        </div>
+        <div class="col-md-3 form-group">
+            <select data-val='true' data-val-required="Document Type Can't be Blank" id="@Html.IdFor(x=>Model.DocTypeID)" name="@Html.NameFor(x=>Model.DocTypeID)" class="form-control applyselect">
+                <option value="">Select</option>
+                @foreach (var item in clsApplicationSetting.GetDocTypeList())
+                {
+                    <option value="@item.DocTypeID">@item.DisplayName</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.DocTypeID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-7 form-group spnuploadsection">
+            <span class="control-fileupload">
+                <label for="UploadDoc">Choose a file :</label>
+                @Html.TextBoxFor(model => model.UploadDoc, new { @type = "file", @class = "text-danger", @multiple = "multiple" })
+                @Html.ValidationMessageFor(model => model.UploadDoc, "", new { @class = "text-danger" })
+            </span>
+        </div>
+        <div class="col-md-2 form-group spnuploadsection">
+            <button type="submit" class="btn mtr-o-grn ripplelink" name="Command" value="Submit">Submit <i class="fa fa-angle-double-right m-0"></i></button>
+        </div>
+    </div>
+
+}
+
+

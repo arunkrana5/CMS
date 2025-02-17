@@ -1,0 +1,29 @@
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\obj\Debug\DataAccess.csproj.AssemblyReference.cache
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\bin\Debug\DataAccess.dll
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\bin\Debug\DataAccess.pdb
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\bin\Debug\Dapper.dll
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\bin\Debug\Newtonsoft.Json.dll
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\bin\Debug\TaxEncryptDecrypt.dll
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\bin\Debug\Dapper.xml
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\bin\Debug\Newtonsoft.Json.xml
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\obj\Debug\DataAccess.dll
+D:\StarProjects\Ravi\New folder\CMS\DataAccess\obj\Debug\DataAccess.pdb
+D:\StarProjects\Ravi\CMS\DataAccess\bin\Debug\DataAccess.dll
+D:\StarProjects\Ravi\CMS\DataAccess\bin\Debug\DataAccess.pdb
+D:\StarProjects\Ravi\CMS\DataAccess\bin\Debug\Newtonsoft.Json.dll
+D:\StarProjects\Ravi\CMS\DataAccess\bin\Debug\Dapper.xml
+D:\StarProjects\Ravi\CMS\DataAccess\obj\Debug\DataAccess.csproj.AssemblyReference.cache
+D:\StarProjects\Ravi\CMS\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+D:\StarProjects\Ravi\CMS\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
+D:\StarProjects\Ravi\CMS\DataAccess\obj\Debug\DataAccess.dll
+D:\StarProjects\Ravi\CMS\DataAccess\obj\Debug\DataAccess.pdb
+D:\Our Projects\CMS\DataAccess\bin\Debug\DataAccess.dll
+D:\Our Projects\CMS\DataAccess\bin\Debug\DataAccess.pdb
+D:\Our Projects\CMS\DataAccess\bin\Debug\Newtonsoft.Json.dll
+D:\Our Projects\CMS\DataAccess\obj\Debug\DataAccess.csproj.AssemblyReference.cache
+D:\Our Projects\CMS\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+D:\Our Projects\CMS\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
+D:\Our Projects\CMS\DataAccess\obj\Debug\DataAccess.dll
+D:\Our Projects\CMS\DataAccess\obj\Debug\DataAccess.pdb

@@ -1,0 +1,93 @@
+html, body{height:100%;}
+body{background:#283593; display:flex; justify-content:center; align-items:center;  margin:0 auto;}
+
+  
+body { 
+    background: #092756;
+    background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -ms-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -ms-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -ms-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
+    background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(101,144,53,.4) 10%,rgba(75,83,32,0) 40%), linear-gradient(to bottom,  rgba(44,111,154,.25) 0%,rgba(63,84,68,.4) 100%), linear-gradient(135deg,  #3976bc 0%,#800000 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E1D6D', endColorstr='#092756',GradientType=1 );
+
+}
+
+
+
+#signin{width:40%; background:#3F51B5; margin:0px auto; box-shadow:0 0 64px rgba(0,0,0,0.5); padding:50px 50px; position:relative; overflow:hidden;}
+#signin{border-radius: 4px; 
+}
+
+#signin .form-title{font:700 30px/1 'Roboto',sans-serif; color:#EBEBEB; text-align:center; margin:35px 0;}
+
+#signin .input-field{position:relative; height:50px; margin:20px 0; transition:all 300ms;}
+#signin .input-field i{position:absolute; bottom:28px; left:15px; color:#bdc2e7; height:0; visibility:hidden; font-size:100%; transition:height 250ms;}
+#signin .input-field label{width:100%; height:100%; position:absolute; margin-top:20px; left:4px; font:400 16px/1 'Roboto',sans-serif; color:#FFF; opacity:1; transition:all 300ms;}
+#signin .input-field input{width: 100%; height:4px; font:500 16px/1 'Roboto',sans-serif; padding:0 20px 0 50px; border:none; box-shadow:0 10px 10px rgba(0,0,0,0.25); color:#606060; border-radius:6px; outline:0; overflow:hidden; position:absolute; bottom:0; left:0; transition:all 300ms;}
+
+#signin .forgot-pw{font:600 14px/1 'Roboto',sans-serif; color:#FFF; text-decoration:none; float:right; margin:0 0 25px 0; display:block;}
+#signin button.login{min-height:60px; font:700 20px/1 'Roboto',sans-serif; width:100%; padding:20px; display:block; background:#3976bc; color:#FFF; border:none; outline:0; cursor:pointer; position:absolute; left:0; bottom:0;}
+#signin .check{width:100%; height:100%; background:#324192; position:absolute; top:100%; left:0; text-align:center; visibility:hidden; transition:all 1s;}
+#signin .check.in{visibility:visible; top:0;}
+#signin .check i{color:#FFF; font-size:64px; line-height:7.4;}
+
+#signin .input-field input:focus{color:#333;}
+#signin .input-field input:focus, #signin .input-field input.not-empty{height:auto; padding:14px 20px 14px 50px !important;}
+#signin .input-field input:focus + i, #signin .input-field input.not-empty + i{font-size:24px; bottom:26px; height:10px; visibility:visible;}
+#signin .input-field input:focus + i + label, #signin .input-field input.not-empty + i + label{font-size:12px; margin-top:-15px; opacity:0.7; animation:label 300ms 1;}
+.form-label-group{
+	margin-bottom:50px;
+}
+
+
+#signin{
+    background: #fff
+}
+#signin .input-field input{
+    background:#0d1f33;
+    color: #fff !important}
+
+#signin .input-field label{
+        color: #3976bc !important;
+        font-weight: bold
+}
+
+
+#signin .form-title{
+    color: #3976bc
+}
+@keyframes label{
+	0%{margin-top:-15px;}
+	50%{margin-top:-25px;}
+	100%{margin-top:-15px;}
+}
+
+#gif{width:50%;}
+#gif a img{max-width:100%; box-shadow:0 0 64px rgba(0,0,0,0.5);}
+
+form{
+	width:100%
+}
+
+
+.lgn-err{
+    width: 100%;
+    display: table;
+    color: #f00;
+    font-weight: bold;
+    background: #ffffff;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding: 10px 20px 16px;
+    font-size: 12px;
+    text-align: center;
+	
+}
+
+
+
+.input-validation-error{
+	border:1px solid #ff0000 !important
+}
+

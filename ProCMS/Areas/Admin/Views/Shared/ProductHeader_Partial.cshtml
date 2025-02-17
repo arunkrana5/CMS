@@ -1,0 +1,23 @@
+﻿@{ 
+    int TabIndex = 0;
+    long ProductID = 0;
+    long.TryParse(ViewBag.ProductID, out ProductID);
+    if(ViewBag.TabIndex!=null)
+    {
+        TabIndex = ViewBag.TabIndex;
+    }
+}
+<div class="tab-list">
+    <ul id="myTab" class="nav nav-tabs bar_tabs">
+        <li role="presentation" class="@(TabIndex==1?"active":"")">
+            <a href="@Url.Action("ProductAdd",new { src= clsCommon.Encrypt(ViewBag.MenuID+"*"+"/Admin/Product/ProductAdd*"+ProductID) })" id="profile-tab" aria-expanded="false">Product Details</a>
+        </li>
+        @if (ProductID!=0)
+        {
+            <li role="presentation" class="@(TabIndex == 2 ? "active" : "")">
+                <a href="@Url.Action("ProductImages",new { src= clsCommon.Encrypt(ViewBag.MenuID+"*"+"/Admin/Product/ProductImages*"+ProductID) })" id="profile-tab" aria-expanded="false">Link Images</a>
+            </li>
+          
+        }
+    </ul>
+</div>

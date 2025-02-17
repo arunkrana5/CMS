@@ -1,0 +1,22 @@
+﻿@model IList<CMSContent>
+
+@foreach (CMSContent item in Model)
+{
+    @Html.Raw(item.Content)
+}
+
+
+@section scripts    {
+
+    <script>
+        $(document).ready(function () {
+            if ($("#ContactusForm") != undefined) {
+                GetContactUsForm("Contact Us");
+            }
+        });
+
+
+
+    </script>
+
+}

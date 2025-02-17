@@ -1,0 +1,52 @@
+﻿@model IList<WebMenu.Admin.ParentChildCollection>
+@{
+    long ParentMenuID = 0;
+    string ParentMenuName = "";
+    long.TryParse(Model.Select(x => x.ParentMenuID).FirstOrDefault().ToString(), out ParentMenuID);
+    ParentMenuName = Model.Select(x => x.ParentMenuName).FirstOrDefault();
+}
+<ul id="MenuTreeView'" class="menutreeview">
+    <li class="radio">
+        @(ParentMenuID == 0 ? "Parent Menu" : ParentMenuName)
+        <input type='radio' id="@ParentMenuID" name="menuradio" onclick="saveParentMenu('@ParentMenuID','@(ParentMenuID==0 ? "Parent Menu" : ParentMenuName)','@(ParentMenuID==0 ? "Parent Menu" : ParentMenuName)')" />
+        <label for="@ParentMenuID" class='radio-label'></label>
+        @if (Model.Count > 1)
+        {
+            foreach (WebMenu.Admin.ParentChildCollection item in Model)
+            {
+            <li class="radio">
+                @item.MenuName
+                <input type="radio" id="@item.WebMenuID" name="menuradio" onclick="saveParentMenu('@item.WebMenuID','@item.MenuName ','@item.ParentMenuMap')" />
+                <label for="@item.WebMenuID" class='radio-label'></label>
+                @if (item.IsChild == "Y")
+                {
+                    @ShowChild(item.ChildList);
+                }
+            </li>
+
+        }
+    }
+
+    </ul>
+
+
+    @helper ShowChild(List<WebMenu.Admin.ParentChildCollection> ChildList)
+    {
+
+
+        <ul class='nested'>
+            @foreach (var item2 in ChildList)
+            {
+            <li class="radio">
+                @item2.MenuName
+                <input type="radio" id="@item2.WebMenuID" name="menuradio" onclick="saveParentMenu('@item2.WebMenuID','@item2.MenuName ','@item2.ParentMenuMap')" />
+                <label for="@item2.WebMenuID" class='radio-label'></label>
+                @if (item2.IsChild == "Y")
+                {
+                    @ShowChild(item2.ChildList);
+                }
+            </li>
+            }
+        </ul>
+
+    }

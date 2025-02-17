@@ -1,0 +1,236 @@
+﻿@model IndexModal
+
+@{
+    string DesignKey = "design" + clsApplicationSetting.GetWebConfigValue("DesignKey") + "/";
+    string Prefix = "/assets/";
+    string Version = clsApplicationSetting.GetWebConfigValue("Version");
+}
+@if (Model.BannerList != null)
+{
+    @Html.Partial("_BannerPartial", Model.BannerList)
+}
+
+@if (Model.CMSContent != null)
+{
+    foreach (CMSContent item in Model.CMSContent)
+    {
+        switch (item.SectionName.ToLower())
+        {
+            case "products":
+                <div class="container">
+                    @Html.Raw(item.Content)
+                    <div class="row">
+                        @{Html.RenderPartial("_ProductList", Model.ProductList);}
+                    </div>
+                </div>
+                break;
+
+            case "clients":
+                <section class="our-client client-list">
+                    <div class="container ">
+                        @Html.Raw(item.Content)
+                        <div class="row">
+                            @{Html.RenderPartial("_ClientList", Model.ClientsList);}
+                        </div>
+                    </div>
+                </section>
+                break;
+            default:
+                @Html.Raw(item.Content);
+                break;
+        }
+
+    }
+}
+
+
+
+<div class="clearfix"></div>
+<div class="thrid-part">
+
+    <div class="container-fuild">
+        <div class="col-md-12">
+
+            <div class="row">
+
+                <div class="col-md-6 thrid-part-backgroun text-right js-animated" data-animate=""
+                     data-animation-classes="animated slideInLeft" data-visibility="true" data-animated="true">
+
+                    <img src="assets/img/second-part-1.jpg" alt="">
+
+                    <div class="content-part-of-thrid">
+                        <h3 class="mt-5 text-left">HIRING THE RIGHT <br>TALENT</h3>
+
+                        <p class="mb-4 text-left">
+                            At, Thrivera, we understand that and are <br>well-equipped to take
+                            that load off your<br> back. <br><br>
+
+                            <a href="staffing-payroll-management/">
+                                Know More
+                            </a>
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-6 animation-images text-left js-animated" data-animate=""
+                     data-animation-classes="animated slideInRight" data-visibility="true" data-animated="true">
+
+                    <img src="assets/img/sections-2..png" alt="" class="img-fluid">
+
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="clearfix"></div>
+
+
+
+<div class="fourth-part" id="area-expertise">
+
+    <div class="col-md-12">
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+            </div>
+
+            <div class="col-md-6 text-right">
+
+                <div class="col-md-11 mt-5">
+
+                    <h3>AREAS OF EXPERTISE</h3>
+
+
+
+                    <div class="list-style" style="margin-top: 40px; margin-bottom: 40px;">
+
+                        <p> <img src="assets/img/checkmark.png" alt="">RECRUITMENT &amp; ON-BOARDING</p>
+
+                        <p><img src="assets/img/checkmark.png" alt="">PAYROLL MANAGMENT</p>
+
+                        <p><img src="assets/img/checkmark.png" alt="">COMPLIANCES MANAGEMENT</p>
+
+                        <p><img src="assets/img/checkmark.png" alt="">TRACKING ANALYSIS</p>
+
+                        <p><img src="assets/img/checkmark.png" alt="">AUTOMATION</p>
+
+                    </div>
+
+                    <a href="why-us/">
+                        <button type="button" class="btn normal">
+                            Know
+                            More
+                        </button>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="clearfix"></div>
+
+
+<div class="clearfix"></div>
+
+<div class="clearfix"></div>
+
+
+@section scripts    {
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.unobtrusive-ajax.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.validate.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.validate.unobtrusive.min.js"))
+    <script>
+
+        $(".btnPRequest").click(function (e) {
+            getProductDemo(this);
+        });
+
+        function getProductDemo(obj) {
+            var PID = $("#ProductID").val();
+            $.ajax({
+                url: "/_ProductDemo/",
+                type: "get",
+                data: { PID: PID },
+                success: function (data) {
+                    $("#TargetDiv").empty();
+                    $("#TargetDiv").html(data);
+                    $("#RequestDemoModal").modal('show');
+                    var form = $("#_ProductDemoFrom").closest("form");
+                    form.removeData('validator');
+                    form.removeData('unobtrusiveValidation');
+                    $.validator.unobtrusive.parse(form);
+                },
+                error: function (er) {
+                    alert(er);
+                }
+            });
+
+        }
+
+        function OnSuccess(object) {
+            CloseLoadingDialog();
+            if (object.Status) {
+                SuccessToaster(object.SuccessMessage);
+                $("#RequestDemoModal").modal('hide');
+            }
+            else {
+                FailToaster(object.SuccessMessage);
+            }
+
+        }
+    </script>
+
+    <script>
+        $('#logo-slider').owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 10000,
+            margin: 100,
+            responsiveClass: true,
+            navText: [
+                '<i class="fa fa-angle-left"></i>',
+                '<i class="fa fa-angle-right"></i>'
+            ],
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: true
+                },
+                600: {
+                    items: 3,
+                    nav: false
+                },
+                1000: {
+                    items: 4,
+                    nav: true,
+                    loop: false
+                }
+            }
+        })
+    </script>
+
+}

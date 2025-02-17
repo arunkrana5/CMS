@@ -1,0 +1,36 @@
+﻿@model Web_ProCMS.Models.Web_LikeComment
+
+
+@using (Ajax.BeginForm("AddComment", "Blog",
+     new { TableID = ViewBag.EncryptedBlogID },
+new AjaxOptions { HttpMethod = "POST", OnSuccess = "BindTarget" },
+new { @id = "_AddCommentFrom", enctype = "multipart/form-data" })
+)
+{
+
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-sm-12 form-group">
+            @Html.TextAreaFor(model => model.Comment, new { @class = "form-control h-150", @placeholder = "Enter your comment here" })
+            @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-sm-6 form-group">
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @placeholder = "Enter Name", @id="check-values" })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+			<div class="checkbox">
+			  <label>
+				<input type="checkbox" id="anonymous" value="Anonymous" class="check-input"><span class="checkbox-material"><span class="check"></span></span> Post as Anonymous
+			  </label>
+			</div>
+        </div>
+        <div class="col-sm-6 form-group" data-toggle= "tooltip" data-original-title= "Your email will not be disclosed">
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Your E-mail Address" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-sm-12">
+            <button type="submit" name="Command" value="Submit" class="btn bnt-grdn  faq-btn">Post a comment</button>
+            
+        </div>
+    </div>
+}

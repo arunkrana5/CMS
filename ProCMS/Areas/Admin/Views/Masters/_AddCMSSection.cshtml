@@ -1,0 +1,51 @@
+﻿
+@model CMSSection.Add
+
+@using (Ajax.BeginForm("_AddCMSSection", "Masters",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "_AddCMSSectionForm" })
+    )
+{
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => Model.CMSID)
+    @Html.HiddenFor(x => Model.CMSSectionID)
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+            <label>Section Name<sup>*</sup></label>
+            @Html.TextBoxFor(model => model.SectionName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SectionName, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+            <label>Priority<sup>*</sup></label>
+            @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+            <label>Page Content<sup>*</sup></label>
+            @Html.TextAreaFor(model => model.Content, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+
+        @if (Model.CMSSectionID > 0)
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+        }
+
+        <button type="button" class="btn cnl-btn ripplelink  pull-right" onclick="ShowLoadingDialog(); window.location = '@Url.Action("CMSSectionList",new { src = clsCommon.Encrypt(ViewBag.MenuID+"*"+"/Admin/Masters/CMSSectionList"+"*"+ViewBag.CMSID+"*"+0) })';"><i class="fa fa-times"></i> Cancel</button>
+
+
+
+    </div>
+}
+
+

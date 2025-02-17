@@ -1,0 +1,104 @@
+﻿@model IndexModal
+
+@{
+    string DesignKey = "design" + clsApplicationSetting.GetWebConfigValue("DesignKey") + "/";
+    string Prefix = "/assets/";
+    string Version = clsApplicationSetting.GetWebConfigValue("Version");
+}
+@if (Model.BannerList != null)
+{
+    @Html.Partial("_BannerPartial", Model.BannerList)
+}
+
+@if (Model.CMSContent != null)
+{
+    foreach (CMSContent item in Model.CMSContent)
+    {
+        switch (item.SectionName.ToLower())
+        {
+            case "products":
+                <div class="container">
+                    @Html.Raw(item.Content)
+                    <div class="row">
+                        @{Html.RenderPartial("_ProductList", Model.ProductList);}
+                    </div>
+                </div>
+                break;
+
+            case "clients":
+                <section class="our-client client-list">
+                    <div class="container ">
+                        @Html.Raw(item.Content)
+                        <div class="row">
+                            @{Html.RenderPartial("_ClientList", Model.ClientsList);}
+                        </div>
+                    </div>
+                </section>
+                break;
+            default:
+                @Html.Raw(item.Content);
+                break;
+        }
+
+    }
+}
+
+<div class="modal fade pop-dgn" id="RequestDemoModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header blk-gdn-btn">
+                <h4 class="modal-title"><span class="spnHead"></span></h4>
+                <div class="close cls-t" data-dismiss="modal">&times;</div>
+            </div>
+            <div class="modal-body p-3">
+                <div id="TargetDiv"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts    {
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.unobtrusive-ajax.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.validate.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.validate.unobtrusive.min.js"))
+<script>
+    $(".btnPRequest").click(function (e) {
+        getProductDemo(this);
+    });
+
+    function getProductDemo(obj) {
+        var PID = $("#ProductID").val();
+        $.ajax({
+            url: "/_ProductDemo/",
+            type: "get",
+            data: { PID: PID },
+            success: function (data) {
+                $("#TargetDiv").empty();
+                $("#TargetDiv").html(data);
+                $("#RequestDemoModal").modal('show');
+                var form = $("#_ProductDemoFrom").closest("form");
+                form.removeData('validator');
+                form.removeData('unobtrusiveValidation');
+                $.validator.unobtrusive.parse(form);
+            },
+            error: function (er) {
+                alert(er);
+            }
+        });
+
+    }
+
+    function OnSuccess(object) {
+        CloseLoadingDialog();
+        if (object.Status) {
+            SuccessToaster(object.SuccessMessage);
+            $("#RequestDemoModal").modal('hide');
+        }
+        else {
+            FailToaster(object.SuccessMessage);
+        }
+
+    }
+    </script>
+}

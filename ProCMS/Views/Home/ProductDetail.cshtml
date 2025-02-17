@@ -1,0 +1,173 @@
+﻿
+@model Product.Web
+@{
+    string DesignKey = "design" + clsApplicationSetting.GetWebConfigValue("DesignKey") + "/";
+    string Prefix = "/assets/";
+
+    string Version = clsApplicationSetting.GetWebConfigValue("Version");
+   
+}
+
+@Html.HiddenFor(x => x.ProductID)
+<div class="banner-new bm-banner  mehrn-grdn ">
+    <nav class="navbar navbar-expand-lg second-menu">
+        <div class="container">
+            <a class="navbar-brand">
+                <div class="logo-mn logo-prd">
+                    <img src="@Model.ProductImagesList.Where(x=>x.IsDefault).Select(x=>x.ImageURL).FirstOrDefault()" alt="@Model.ProductHeading">
+                    <strong class="white-clr"> @Model.ProductHeading </strong>
+                </div>
+                <div class="sticky-logo logo-prd">
+                    <img src="images/logo/sahaj-businessmate-logo.png" alt="@Model.ProductHeading">
+                    <strong> @Model.ProductHeading</strong>
+                </div>
+            </a>
+            <div class="" id="navbarsExample06">
+                <ul class="navbar-nav ml-auto fadeInDown animated">
+                    <li class="nav-item"> <a class="rqs-btn btnPRequest">Request a Demo</a> </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container" style="position:relative">
+        <div class="banner-text">
+            <h1>@Model.ProductShortDescription</h1>
+        </div>
+        <div class="home-slider">
+            <div class="tab-holder">
+                <div class="girl"> </div>
+                <div id="slideshow">
+                    <div> <img src="http://103.76.214.89:140//Attachments/Banner/40.jpg"> </div>
+                    <div> <img src="http://103.76.214.89:140//Attachments/Banner/43.jpg"> </div>
+                    <div> <img src="http://103.76.214.89:140//Attachments/Banner/44.jpg"> </div>
+                </div>
+            </div>
+            <div class="mobile-holder">
+                <div id="slideshow-two">
+                    <div> <img src="http://103.76.214.89:140//Attachments/Banner/39.jpg"> </div>
+                    <div> <img src="http://103.76.214.89:140//Attachments/Banner/41.jpg"> </div>
+                    <div> <img src="http://103.76.214.89:140//Attachments/Banner/42.jpg"> </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row flex-column-reverse flex-md-row">
+        <div class="col-md-12">
+            <div class="heading mrn-btm-bg txt-clr fadeInDown animated">
+                <span class="shj-b-xdrk d-block">About Us</span>
+                <h2><span class="shj-b">@Model.ProductName</h2>
+                <img src="@Model.ProductImagesList.Where(x=>x.IsDefault).Select(x=>x.ImageURL).FirstOrDefault()" alt="@Model.ProductHeading">
+
+            </div>
+            @Html.Raw(Model.ProductDescription)
+        </div>
+
+    </div>
+</div>
+
+
+@Html.Raw(Model.OtherDescription)
+
+
+<div class="modal fade pop-dgn" id="RequestDemoModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-header blk-gdn-btn">
+                <h4 class="modal-title">@Model.ProductHeading</h4>
+                <div class="close cls-t" data-dismiss="modal">&times;</div>
+            </div>
+            <div class="modal-body p-3">
+                <div id="TargetDiv"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts    {
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.unobtrusive-ajax.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.validate.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.validate.unobtrusive.min.js"))
+
+    <script>
+        $(".btnPRequest").click(function (e) {
+            getProductDemo(this);
+        });
+
+        function getProductDemo(obj) {
+            var PID = $("#ProductID").val();
+            $.ajax({
+                url: "/_ProductDemo/",
+                type: "get",
+                data: { PID: PID },
+                success: function (data) {
+                    $("#TargetDiv").empty();
+                    $("#TargetDiv").html(data);
+                    $("#RequestDemoModal").modal('show');
+                    var form = $("#_ProductDemoFrom").closest("form");
+                    form.removeData('validator');
+                    form.removeData('unobtrusiveValidation');
+                    $.validator.unobtrusive.parse(form);
+                },
+                error: function (er) {
+                    alert(er);
+                }
+            });
+
+        }
+
+        function OnSuccess(object) {
+            CloseLoadingDialog();
+            if (object.Status) {
+                SuccessToaster(object.SuccessMessage);
+                $("#RequestDemoModal").modal('hide');
+            }
+            else {
+                FailToaster(object.SuccessMessage);
+            }
+
+        }
+
+    </script>
+
+    <script>
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 1) {
+                $('.second-menu').addClass("sticky");
+            }
+            else {
+                $('.second-menu').removeClass("sticky");
+            }
+        });
+    </script>
+    <script>
+        $("#slideshow > div:gt(0)").hide();
+
+        setInterval(function () {
+            $('#slideshow > div:first')
+                .fadeOut(1000)
+                .next()
+                .fadeIn(1000)
+                .end()
+                .appendTo('#slideshow');
+        }, 3000);
+    </script>
+    <script>
+        $("#slideshow-two > div:gt(0)").hide();
+
+        setInterval(function () {
+            $('#slideshow-two > div:first')
+                .fadeOut(1000)
+                .next()
+                .fadeIn(1000)
+                .end()
+                .appendTo('#slideshow-two');
+        }, 3000);
+    </script>
+}

@@ -1,0 +1,54 @@
+﻿
+@model string
+
+<div class="row">
+    <div class="col-sm-5"><h1 class="heading-one ">@Model</h1></div>
+    <div class="col-sm-7 text-right">
+        @if (clsApplicationSetting.GetSessionValue("Write") == "True")
+        {
+            <a class="btn mtr-g-grn btn-l ripplelink " onclick="ListHeaderAdd();">
+                <i class="fa fa-plus"></i> Add
+            </a>
+        }
+        @if (clsApplicationSetting.GetSessionValue("Export") == "True")
+        {
+            <a id="anchListExcelReport" onclick="ListHeaderExport();" class="btn blk-gdn-btn btn-l ripplelink">
+                <i class="fa fa-file-excel"></i> Export
+            </a>
+        }
+    </div>
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    function ListHeaderAdd() {
+        var count = 0;
+		ShowLoadingDialog();
+		if ($("#hdnAddUrl").val()) {
+			window.location = $("#hdnAddUrl").val();
+		}
+		else {
+			CloseLoadingDialog();
+			FailToaster("Link not found");
+		}
+    }
+
+    function ListHeaderExport() {
+		var count = 0;
+		if ($("#hdnExportUrl").val()) {
+			window.location = $("#hdnExportUrl").val();
+		}
+		else {
+			CloseLoadingDialog();
+			FailToaster("Link not found");
+		}
+    }
+
+
+
+</script>
+

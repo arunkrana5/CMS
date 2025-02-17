@@ -1,0 +1,20 @@
+﻿@using System.Data
+@model DataSet
+
+@foreach (DataRow item in Model.Tables[0].Rows)
+{
+    <div class="commet-dtl">
+        <div class="avterimg">
+            <span class="ShortName">@item["CName"].ToString()</span>
+            @*@Html.CreateImage("demo-img.jpg", "demo-img", "")*@
+        </div>
+        <div class="commenttext">
+            <strong>@item["Name"].ToString()</strong>
+            <p>
+                @item["Comment"]
+            </p>
+        </div>
+
+
+    </div>
+}

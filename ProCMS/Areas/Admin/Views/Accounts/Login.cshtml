@@ -1,0 +1,102 @@
+﻿@model AdminUser.Login
+
+@{
+    Layout = null;
+    string DesignKey = "design"+clsApplicationSetting.GetWebConfigValue("DesignKey")+"/";
+    string Prefix = "/Areas/Admin/assets/";
+
+    string Version = clsApplicationSetting.GetWebConfigValue("Version");
+    string PageName = clsApplicationSetting.GetPageName();
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/Areas/assets/design@(DesignKey)/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="/Areas/assets/design@(DesignKey)/images/favicon.png" type="image/png" sizes="50x50">
+
+    <title>@PageName </title>
+    <meta name="title" content="@PageName" />
+    <meta name="keywords" content="@PageName" />
+    <meta name="description" content="@PageName" />
+
+    @Html.IncludeVersionedCss(Url.Content(Prefix+ DesignKey + "css/bootstrap.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix+ DesignKey + "css/font-awesome.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix+ DesignKey + "css/animate.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix+ DesignKey + "css/login.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix+ DesignKey + "css/logintheme.css"))
+
+
+<link href="~/Areas/Admin/assets/design/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    @using (Html.BeginForm("Login", "Accounts", new { ReturnURL = ViewBag.ReturnURL }, FormMethod.Post,
+new
+{
+    name = "LoginForm",
+    id = "LoginForm",
+    @class = "form-horizontal form-label-left input_mask",
+    enctype = "multipart/form-data"
+}))
+    {
+        <div id="signin">
+            <div class="form-title">Sign in</div>
+            <div class="input-field">
+                @Html.TextBoxFor(model => model.UserName, new { @class = (TempData["SuccessMsg"] == null ? "not-empty" : "not-empty") })
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <label for="UserName">User Name</label>
+            </div>
+            <div class="input-field">
+                @Html.TextBoxFor(model => model.Password, new { @type = "Password", @class = (TempData["SuccessMsg"] == null ? "" : "not-empty") })
+
+                <i class="fa fa-lock" aria-hidden="true"></i>
+
+                <label for="Password">Password</label>
+            </div>
+
+            <div class="form-label-group">
+                @if (TempData["SuccessMsg"] != null)
+                {
+                    if (TempData["SuccessMsg"].ToString() != "")
+                    {
+                        <div class="lgn-err">
+                            @TempData["SuccessMsg"]
+                        </div>
+                    }
+                }
+            </div>
+            <button value="Submit" type="submit" name="Command" class="login">Log in</button>
+
+
+        </div>
+    }
+
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.unobtrusive-ajax.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.validate.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "js/jquery.validate.unobtrusive.min.js"))
+
+
+
+    <script>
+        $("input").on('focusout', function () {
+            $(this).each(function (i, e) {
+                if ($(e).val() != "") {
+                    $(e).addClass('not-empty');
+                } else {
+                    $(e).removeClass('not-empty');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,72 @@
+﻿@model IList<Blog.Web>
+
+@{
+    string ShowTagsInList = "", ShowAuthorsInList = "", ShowDateInList = "", ShowReadMoreInList = "";
+    ShowTagsInList = clsApplicationSetting.GetConfigValue("ShowTagsInList");
+    ShowAuthorsInList = clsApplicationSetting.GetConfigValue("ShowAuthorsInList");
+    ShowDateInList = clsApplicationSetting.GetConfigValue("ShowDateInList");
+    ShowReadMoreInList = clsApplicationSetting.GetConfigValue("ShowReadMoreInList");
+}
+
+<div class="masonry js-masonry js-images-loaded row">
+    @foreach (var item in Model)
+    {
+        <div class="masonry__item js-masonry-item">
+            <div class="item">
+                <article class="white-panel card">
+                    <a href="/@item.TypeURL/@item.BlogURL">
+                        <img src="@item.ListImageURL"  class="card-img-top"/>
+                    </a>
+                    <div class="card-body">
+                        @if (!string.IsNullOrEmpty(item.AuthorName) && ShowAuthorsInList == "Y")
+                        {
+                            <span class="meta_author_name">
+                                <i> <a href="@("/" + item.TypeURL + "-Author/" + item.AuthorName)">  @item.AuthorName</a></i>
+                            </span>
+                        }
+                        @if (item.PublishedDate.Year>1900 && ShowDateInList == "Y")
+                        {
+                            <span class="meta_date dte">
+                                <i> <a href="@("/" + item.TypeURL + "-Date/" + item.PublishedDate)">  @item.PublishedDate</a></i>
+                            </span>
+                        }
+                        @if (item.AllTags.Count > 0 && ShowTagsInList == "Y")
+                        {
+                            <ul class="list-unstyled inline-style">
+                                @foreach (var itemss in item.AllTags)
+                                {
+                                    <li>
+                                        <a href="@("/" + item.TypeURL + "-Tags/" + itemss.URL)" >@itemss.Name</a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    <h2 class="card-title">
+                        <a href="@("/" + item.TypeURL +"/"+ item.BlogURL)">  @item.Heading</a>
+                    </h2>
+                        @if (!string.IsNullOrEmpty(item.ShortDesc))
+                        {
+                            <p class="card-text">@item.ShortDesc</p>
+                        }
+                        @if (ShowReadMoreInList == "Y")
+                        {
+                            <div class="card-link">
+                                <a href="/@item.TypeURL/@item.BlogURL" class="article-Button">
+                                    Read More <i class="fas fa-angle-right">
+                                    </i>
+                                </a>
+                            </div>
+                        }
+                    </div>
+					
+					
+                </article>
+				
+            </div>
+
+        </div>
+
+    }
+	
+	
+</div>

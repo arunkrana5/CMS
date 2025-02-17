@@ -1,0 +1,296 @@
+﻿@model WebMenu.Admin.Add
+
+@{
+    string WebMenuID = "0";
+    if (ViewBag.WebMenuID != null)
+    {
+        WebMenuID = ViewBag.WebMenuID;
+    }
+}
+<div class="card multicard mb-4 shadow-box">
+    <h1 class="heading-one ">Website Menu</h1>
+    <div class="card-body">
+
+        <div class="x_panel">
+
+            @using (Ajax.BeginForm("AddWebsiteMenu", "Masters",
+                new { src = ViewBag.src }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "BindTarget", OnBegin = "ShowLoadingDialog();" },
+new
+{
+    name = "AddWebsiteMenuForm",
+    id = "AddWebsiteMenuForm",
+    @class = "form-horizontal form-label-left input_mask",
+    enctype = "multipart/form-data"
+}))
+            {
+                @Html.HiddenFor(model => Model.WebMenuID)
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+                        <label>Menu Type<sup>*</sup></label>
+                        <select id="@Html.IdFor(x => Model.MenuType)" name="@Html.IdFor(x => Model.MenuType)" class="form-control applyselect">
+                            <option @(Model.MenuType == "Top" ? "selected" : "")>Top</option>
+                            <option @(Model.MenuType == "Bottom" ? "selected" : "")>Bottom</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => Model.MenuType, "", new { @class = "text-danger " })
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+                        <label>Menu Name<sup>*</sup></label>
+                        @Html.TextBoxFor(model => model.MenuName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MenuName, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+                        <label>Target<sup>*</sup></label>
+                        @Html.EnumDropDownListFor(model => model.Target, "Select", htmlAttributes: new { @class = "form-control applyselect" })
+                        @Html.ValidationMessageFor(model => model.Target, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+                        <label>Parent Menu</label>
+                        <span class="achor-link" id="spnMenuMap">@(!string.IsNullOrEmpty(Model.ParentMenuMap) ? Model.ParentMenuMap : "--")</span>
+                        @Html.HiddenFor(x => Model.ParentMenuID)
+                        <a onclick="ModalMenu(this)" class="hlt-clr"  title="click for Choose Menu"><strong>Choose Menu <i class="fa fa-bars pull-right" aria-hidden="true"></i></strong></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+                        <label>Menu URL Type <sup>*</sup></label>
+                        <select id="@Html.IdFor(x=>Model.URLType)" name="@Html.IdFor(x=>Model.URLType)" class="form-control applyselect">
+
+                            <option @(Model.URLType == "Manual" ? "selected" : "") value="Manual">Manual</option>
+                            <option @(Model.URLType == "Gallery" ? "selected" : "") value="Gallery">Gallery</option>
+                            <option @(Model.URLType == "CMS" ? "selected" : "") value="CMS">CMS</option>
+                            <option @(Model.URLType == "BLOG" ? "selected" : "") value="BLOG">Blog</option>
+                            <option @(Model.URLType == "Category" ? "selected" : "") value="Category">Category</option>
+                            <option @(Model.URLType == "FAQ" ? "selected" : "") value="FAQ">FAQ</option>
+                        </select>
+                    </div>
+
+
+
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-6 form-group divPageURL">
+                        <label>Page URL<sup>*</sup></label>
+                        <div class="input-group">
+                            <input type="text" tag-value="@clsCommon.Encrypt("WebsiteMenu")" tag-id="@Model.WebMenuID" name="txtURL" id="txtURL" value="@Model.MenuURL" class="form-control" />
+                            <span class="input-group-addon">
+                                <a id="btn_generateURL"><i class="fa fa-sign-out" aria-hidden="true"></i> Generate url</a>
+                            </span>
+                            @Html.ValidationMessageFor(model => model.MenuURL, "", new { @class = "text-danger" })
+                        </div>
+                        @Html.HiddenFor(model => model.MenuURL, new { @class = "hdnURL" })
+                        <div class="anchorShowURL">
+                            @Model.MenuURL
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+                        <label>Priority<sup>*</sup></label>
+                        @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div id="DivCMSTarget" class="col-lg-12"></div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+                        <label>Choose Image</label>
+                        <a class="btn-slt" onclick="DocumentList(0)"><strong>Select Image <i class="fa fa-file"></i></strong> </a>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        @Html.HiddenFor(model => model.DocID, new { @class = "hdnselectedDoc_0" })
+                        <img src="@Model.DocURL" class="ImgselectedURL_0 detailimage" />
+                    </div>
+                </div>
+                <div class="row">
+
+                    @if (Model.WebMenuID > 0)
+                    {
+                        <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+                    }
+                    else
+                    {
+                        <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+                    }
+                    <button type="button" class="btn cnl-btn ripplelink  pull-right" onclick="ShowLoadingDialog(); window.location = '@Url.Action("WebsiteMenuList",new { src = clsCommon.Encrypt(ViewBag.MenuID+"*"+"/Admin/Masters/WebsiteMenuList") })';"><i class="fa fa-times"></i> Cancel</button>
+                </div>
+
+            }
+
+        </div>
+    </div>
+
+
+    @* Modal Pop up for Menu *@
+    <div class="modal fade treeview" id="MenuModal">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><i class="fas fa-bars"></i> Select Parent Menu</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Parent Menu</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control applyselect" id="ddModalMainMenu" onchange="BindChildMenu(this)">
+                                <option  value="0">Select</option>
+                                @if (ViewBag.ParentMenuList != null)
+                                {
+                                    foreach (var item in ViewBag.ParentMenuList)
+                                    {
+                                        <option value="@item.WebMenuID">@item.MenuName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="model-prnt">
+                                <span id="ModalspnMenuMap">@Model.ParentMenuMap</span>
+                                <div id="DivMenuView"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section scripts    {
+
+    <script>
+
+        function ModalMenu() {
+         
+            $('#MenuModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+             
+           
+        }
+
+        function BindChildMenu(obj)
+        {
+            var ID = $(obj).find("option:selected").val();
+            $("#ModalspnMenuMap").text('');
+            if (ID != undefined)
+            {
+                $.ajax({
+                    url: "/Admin/Masters/_ChildMenuList",
+                    type: "Post",
+                    data: { src: EncryptQueryStringJSON(@ViewBag.MenuID+"*" + "/Admin/Masters/_ChildMenuList" + "*" + ID) },
+                    success: function (data) {
+                        $(data).each(function () {
+                            $("#DivMenuView").empty();
+                            $("#DivMenuView").html(data);
+                            ApplyTreeViewScript();
+                        });
+                     },
+                     error: function (er) {
+                          alert(er);
+                      }
+                });
+            }
+        }
+
+        function ApplyTreeViewScript() {
+            var toggler = document.getElementsByClassName("caret");
+            var i;
+
+            for (i = 0; i < toggler.length; i++) {
+                toggler[i].addEventListener("click", function () {
+                    this.parentElement.querySelector(".nested").classList.toggle("active");
+                    this.classList.toggle("caret-down");
+                });
+            }
+
+        }
+
+        function saveParentMenu(WebMenuID, MenuName, ParentMenuMap)
+        {
+            $("#ParentMenuID").val(WebMenuID);
+            $("#spnMenuMap").html(ParentMenuMap);
+            $("#ModalspnMenuMap").html(ParentMenuMap);
+
+        }
+    </script>
+    <script>
+   $(document).ready(function () {
+       BindMenuURLType();
+    });
+    $("#URLType").change(function() {
+        BindMenuURLType();
+    });
+
+        function BindMenuURLType()
+    {
+            var URLType = $("#URLType option:selected").val();
+            var MenuURL = $("#MenuURL").val();
+        if (URLType != "Manual")
+        {
+            $("#txtURL").attr("readonly", "readonly");
+            $("#btn_generateURL").hide();
+            $.ajax({
+                url: "/Admin/Masters/_MenuURLType",
+                type: "Post",
+                data: { src: EncryptQueryStringJSON(@ViewBag.MenuID+"*" + "/Admin/Masters/_MenuURLType" + "*" + URLType + "*" + MenuURL) },
+                success: function (data) {
+                    $(data).each(function () {
+                        $("#DivCMSTarget").empty();
+                        $("#DivCMSTarget").html(data);
+                    });
+                },
+                error: function (er) {
+                    alert(er);
+                }
+            });
+        }
+        else
+        {
+            $("#txtURL").removeAttr("readonly");
+            $(".anchorShowURL").text('');
+            $("#btn_generateURL").show();
+             $("#DivCMSTarget").empty();
+        }
+    }
+
+    function saveCMSURL(CMSID, PageURL)
+    {
+        $("#txtURL").val(PageURL);
+        $(".hdnURL").val(PageURL);
+          $(".anchorShowURL").text(PageURL);
+    }
+
+
+		function BindTarget(object) {
+			CloseLoadingDialog();
+			if (object.Status) {
+				SuccessToaster(object.SuccessMessage);
+				window.location.href = object.RedirectURL;
+			}
+			else
+			{
+				FailToaster(object.SuccessMessage);
+			}
+
+		}
+
+
+    </script>
+
+}

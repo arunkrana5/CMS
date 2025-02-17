@@ -1,0 +1,108 @@
+﻿@model Category.Admin.Add
+<div class="page-title">
+    <div class="title_left">
+        <h3>Category Details</h3>
+    </div>
+</div>
+
+<div class="x_panel">
+
+    @using (Ajax.BeginForm("CategoryAdd", "Product",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "CategoryAddForm", enctype = "multipart/form-data" })
+    )
+    {
+
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Category Name <sup>*</sup></label>
+            @Html.TextBoxFor(model => model.CategoryName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => Model.CategoryName, "", new { @class = "text-danger " })
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Location </label>
+            @Html.TextBoxFor(model => model.Location, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Priority<sup>*</sup></label>
+            @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Image URL</label>
+            @Html.TextBoxFor(model => model.ImageURL, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ImageURL, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+            <label>Category URL<sup>*</sup></label>
+            <div class="input-group">
+                <input type="text" tag-value="@clsCommon.Encrypt("Category")" tag-id="@Model.CategoryID" name="txtURL" id="txtURL" value="@Model.CategoryURL" class="form-control" />
+                <span class="input-group-addon">
+                    <a id="btn_generateURL"><i class="fa fa-sign-out" aria-hidden="true"></i> Generate url</a>
+                </span>
+                @Html.ValidationMessageFor(model => model.CategoryURL, "", new { @class = "text-danger" })
+            </div>
+            @Html.HiddenFor(model => model.CategoryURL, new { @class = "hdnURL" })
+            <div class="anchorShowURL">
+                @Model.CategoryURL
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+            <label>Description</label>
+            @Html.TextAreaFor(model => model.CategoryDescription, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Choose Image<sup>*</sup></label>
+            <a class="btn-slt" onclick="DocumentList(0)"><strong>Select Banner <i class="fa fa-file"></i></strong> </a>
+        </div>
+
+        <div class="col-md-6 form-group">
+            @Html.HiddenFor(model => model.Cat_DocID, new { @class = "hdnselectedDoc_0" })
+            <img src="@Model.DocPath" class="ImgselectedURL_0 detailimage" />
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+                @if (Model.CategoryID > 0)
+                {
+                    <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+                }
+                <button type="button" class="btn cnl-btn ripplelink pull-right" onclick="ShowLoadingDialog(); window.location = '@Url.Action("CategoryList",new { src = clsCommon.Encrypt(ViewBag.MenuID+"*"+"/Admin/Product/CategoryList") })';"><i class="fa fa-times"></i> Cancel</button>
+
+
+
+            </div>
+        </div>
+    }
+
+</div>
+
+@section scripts    {
+    <script>
+
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.href = obj.RedirectURL;
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+    </script>
+}

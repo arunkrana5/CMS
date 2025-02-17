@@ -1,0 +1,30 @@
+﻿@model IList<Category.Web>
+    <div class="container">
+        <div class="page-inr">
+            <div class="as-causes as-causes-grid">
+                <ul class="row">
+                    @foreach (var item in Model)
+                    {
+
+
+                        <li class="col-md-4">
+                            <figure>
+                                <a href="/Category/@item.CategoryURL"> 
+								<img class="gallery-image" src="@item.ImageURL" alt="" />
+								</a>
+                            </figure>
+                            <div class="as-causes-text">
+                                <div class="as-causes-info">
+                                    <span class="hlt">@item.CategoryName</span>
+                                     @Html.Raw(item.CategoryDescription)
+                                </div>
+
+                                <a href="#" class="as-causes-btn">Read More</a>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,137 @@
+﻿@model Banner.Admin.Add
+<div class="page-title">
+    <div class="title_left">
+        <h3>Banner Details</h3>
+    </div>
+</div>
+
+<div class="x_panel">
+
+    @using (Ajax.BeginForm("BannerAdd", "Masters",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "BannerAddForm", enctype = "multipart/form-data" })
+    )
+    {
+
+
+
+    <div class="row">
+
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Banner Type<sup>*</sup></label>
+            <select id="@Html.IdFor(x => Model.BannerType)" name="@Html.IdFor(x => Model.BannerType)" class="form-control applyselect " onchange="ShowHidePageURL()">
+                @if (clsApplicationSetting.GetSessionValue("RoleID") != "3")
+                {
+                    <option @(Model.BannerType == "Main" ? "selected" : "")>Main</option>
+                }
+                <option @(Model.BannerType == "Inner Page" ? "selected" : "")>Inner Page</option>
+            </select>
+            @Html.ValidationMessageFor(model => Model.BannerType, "", new { @class = "text-danger " })
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group" id="PageURLDIV">
+            <label>Page URL </label>
+            @Html.TextBoxFor(model => model.InnerPageURL, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.InnerPageURL, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Heading </label>
+            @Html.TextBoxFor(model => model.Heading, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Heading, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Sub Heading </label>
+            @Html.TextBoxFor(model => model.SubHeading, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SubHeading, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Target<sup>*</sup></label>
+            @Html.EnumDropDownListFor(model => model.Target, "Select", htmlAttributes: new { @class = "form-control applyselect" })
+            @Html.ValidationMessageFor(model => model.Target, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>GoTo URL</label>
+            @Html.TextBoxFor(model => model.GoToURL, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.GoToURL, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Priority<sup>*</sup></label>
+            @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Banner URL</label>
+            @Html.HiddenFor(model => model.DocID, new { @class = "hdnselectedDoc_0" })
+            @Html.TextBoxFor(model => model.BannerURL, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.BannerURL, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Choose Banner</label>
+            <a class="btn-slt" onclick="DocumentList(0)"><strong>Select Banner <i class="fa fa-file"></i></strong> </a>
+        </div>
+
+        <div class="col-md-6 form-group">
+            <img src="@Model.DocURL" class="ImgselectedURL_0 detailimage" />
+        </div>
+        <div class="col-md-12 form-group">
+            @if (Model.BannerID > 0)
+            {
+                <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+            }
+            else
+            {
+                <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+            }
+
+
+            <button type="button" class="btn cnl-btn ripplelink  pull-right" onclick="ShowLoadingDialog(); window.location = '@Url.Action("BannerList",new { src = clsCommon.Encrypt(ViewBag.MenuID+"*"+"/Admin/Masters/BannerList") })';"><i class="fa fa-times"></i> Cancel</button>
+
+
+
+
+        </div>
+    </div>
+
+    }
+
+</div>
+
+@section scripts    {
+    <script>
+        $(document).ready(function () {
+            ShowHidePageURL();
+        });
+        function ShowHidePageURL() {
+            var BannerType = $("#BannerType option:selected").val();
+            if (BannerType == "Inner Page") {
+                $("#PageURLDIV").show();
+                $("#InnerPageURL").attr("required", "required")
+            }
+            else {
+
+                $("#PageURLDIV").hide();
+                $("#InnerPageURL").val('');
+                $("#InnerPageURL").removeAttr("required");
+            }
+
+        }
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.href = obj.RedirectURL;
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+    </script>
+}

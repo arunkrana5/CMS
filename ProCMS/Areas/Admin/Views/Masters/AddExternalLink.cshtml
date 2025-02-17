@@ -1,0 +1,89 @@
+﻿@model ExternalLinks.Admin.Add
+<div class="page-title">
+    <div class="title_left">
+        <h3>External Details</h3>
+    </div>
+</div>
+
+<div class="x_panel">
+
+    @using (Ajax.BeginForm("AddExternalLink", "Masters",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "AddExternalLinkForm", enctype = "multipart/form-data" })
+    )
+    {
+
+        @Html.HiddenFor(x => Model.LinkID)
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+            <label>Name<sup>*</sup></label>
+            @Html.TextBoxFor(model => model.LinkName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.LinkName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+            <label>URL<sup>*</sup></label>
+            @Html.TextBoxFor(model => model.LinkURL, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.LinkURL, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+            <label>Priority<sup>*</sup></label>
+            @Html.TextBoxFor(model => model.Priority, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+            <label>Image URL<sup>*</sup></label>
+            @Html.HiddenFor(model => model.DocID, new { @class = "hdnselectedDoc_0" })
+            @Html.TextBoxFor(model => model.ImageURL, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ImageURL, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 form-group">
+            <label>Choose Image<sup>*</sup></label>
+            <a class="btn-slt" onclick="DocumentList(0)"><strong>Select Image <i class="fa fa-file"></i></strong> </a>
+        </div>
+
+
+
+        <div class="col-md-6 form-group">
+            <img src="@Model.DocURL" class="ImgselectedURL_0 detailimage" />
+        </div>
+    </div>
+
+    <div class="row">
+
+        @if (Model.LinkID > 0)
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+        }
+        <button type="button" class="btn cnl-btn ripplelink  pull-right" onclick="ShowLoadingDialog(); window.location = '@Url.Action("ExternalLinksList",new { src = clsCommon.Encrypt(ViewBag.MenuID+"*"+"/Admin/Masters/ExternalLinksList") })';"><i class="fa fa-times"></i> Cancel</button>
+
+    </div>
+
+
+
+    }
+
+</div>
+
+@section scripts    {
+    <script>
+     
+        function OnSuccess(obj) {
+            if (obj.Status) {
+                SuccessToaster(obj.SuccessMessage);
+                window.location.href = obj.RedirectURL;
+            }
+            else {
+                CloseLoadingDialog();
+                FailToaster(obj.SuccessMessage);
+
+            }
+        }
+    </script>
+}

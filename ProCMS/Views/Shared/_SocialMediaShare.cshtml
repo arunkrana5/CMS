@@ -1,0 +1,49 @@
+﻿ <ul>
+    <li>Share :</li>
+    <li>
+        <a class="share-btn share-btn-branded share-btn-twitter"
+           href="https://twitter.com/share?url=@ViewBag.twitterURL&text=@ViewBag.twittertitle&via=@ViewBag.twittertitle">
+            <i class="fab fa-twitter"></i>
+
+        </a>
+    </li>
+
+    <li>
+        <!-- Icon-only Branded Facebook button -->
+        <a class="share-btn share-btn-branded share-btn-facebook"
+           href="https://www.facebook.com/sharer/sharer.php?u=@ViewBag.twitterURL">
+            <i class="fab fa-facebook-f"></i>
+
+        </a>
+
+    </li>
+    <li>
+
+        <!-- Icon-only Branded LinkedIn button -->
+        <a class="share-btn share-btn-branded share-btn-linkedin"
+           href="https://www.linkedin.com/shareArticle?mini=true&url=@ViewBag.twitterURL">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+    </li>
+
+
+    <li>
+        <a class="wclr btnwatsup"
+           href="javascripts:;"
+           data-link="@ViewBag.twitterURL"
+           data-caption="@ViewBag.twittertitle"
+           data-text="@ViewBag.description"
+           data-creator="@ViewBag.twitterURL">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </li>
+    <li>
+        <!-- Icon-only Email button -->
+        <a class="share-btn share-btn-email"
+           href="mailto:?subject=@ViewBag.twittertitle&body=@ViewBag.description">
+            <i class="fas fa-envelope"></i>
+
+        </a>
+
+    </li>
+</ul>

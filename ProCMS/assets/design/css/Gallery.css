@@ -1,0 +1,354 @@
+﻿.inner-banner.gallary-banner h3 {
+    color: #3976bc;
+}
+
+section.module.parallax {
+    height: 420px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
+/*************/
+.grycard-dgn {
+	position: relative;
+	width: 100%;
+	height: 400px;
+	background: #fff;
+	transform: rotateX(0) rotateY(0);
+	transform-style: preserve-3d;
+	transition-duration: 0.1s;
+	transition-timing-function: ease !important;
+	backface-visibility: hidden;
+	will-change: tranform;
+	margin-bottom: 40px;
+	-webkit-box-shadow: 4px 2px 22px 0px rgba(204,204,204,1);
+	-moz-box-shadow: 4px 2px 22px 0px rgba(204,204,204,1);
+	box-shadow: 4px 2px 22px 0px rgba(204,204,204,1);
+	border: 0px;
+}
+
+.card__image img {
+	max-width: 100%;
+	height: 300px;
+
+}
+
+
+.grycard-dgn, .card__image img{
+	border-radius: 10px
+}
+.card__heading {
+	position: absolute;
+	bottom: 10px;
+	left: -20px;
+	width: 100%;
+	color: #FFF;
+}
+
+	.card__heading .small {
+		display: inline-block;
+		margin-bottom: 0px;
+		text-transform: uppercase;
+		font-size: 16px;
+		transform: translateZ(15px);
+	}
+
+	.card__heading h2, .card__heading .small {
+		color: #3976bc;
+	}
+
+	.card__heading h2 {
+		margin: 0;
+		font-size: 25px;
+		transform: translateZ(30px);
+	}
+
+.card.rounded,
+.card.rounded .card__overlay {
+	border-radius: 8px;
+}
+
+.card.is-out {
+	transform: rotateX(0) rotateY(0) !important;
+	transition-duration: 1s;
+}
+
+
+
+
+.grycard-dgn {
+	padding: 20px
+}
+
+.grycardmg-top {
+	position: absolute;
+}
+
+.grytop {
+	right: -31px;
+	top: -30px;
+}
+
+.grybtm {
+	bottom: 27px;
+	right: 0px;
+}
+
+.w-70 {
+	width: 70px !important;
+}
+
+.grycardmg-top img {
+	width: 123px;
+}
+
+.gryimg-bg {
+	position: absolute;
+	top: -70px;
+	left: -136px;
+	z-index: -100;
+}
+
+.gry-bg {
+	position: relative;
+}
+
+	.gry-bg:before {
+		content: "";
+		background: hsla(0, 0%, 100%, 1);
+
+background: linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(3, 100%, 73%, 0) 59%);
+
+background: -moz-linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(3, 100%, 73%, 0) 59%);
+
+background: -webkit-linear-gradient(90deg, hsla(0, 0%, 100%, 1) 0%, hsla(3, 100%, 73%, 0) 59%);
+
+filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#FFFFFF", endColorstr="#FF7B74", GradientType=1 );
+		position: absolute;
+		top: -420px;
+		width: 100%;
+		height: 420px;
+	}
+
+.grycard-dgn:hover .shdhvr {
+	box-shadow: 0 19px 38px rgb(0 0 0 / 30%), 0 15px 12px rgb(0 0 0 / 22%);
+}
+
+
+
+/******************/
+.grylist {
+	position: relative;
+	min-height: 100%;
+	display: initial;
+	transition: all ease 1s;
+	background-color: #fff;
+	overflow-x: hidden;
+}
+
+	.grylist .item {
+		width: 276px;
+		display: block;
+		float: left;
+		transition: all ease 400ms;
+		background-color: #000;
+		position: relative;
+	}
+
+		.grylist .item:hover,
+		.grylist .item:focus {
+			transform: scale(1.1);
+			z-index: 50;
+			box-shadow: 0 0 10px black;
+		}
+
+		.grylist .item figure {
+			transition: all ease 1s;
+			overflow: hidden;
+			height: 300px;
+			padding: 0;
+			margin: 0;
+			position: relative;
+		}
+
+		.grylist .item figure img {
+    transform: scale(1.4);
+    transition: all ease 1s;
+    width: inherit;
+}
+
+.gryslttxt figcaption {
+	filter: blur(0px) !important;
+	opacity: 1 !important;
+	font-size: 25px !important;
+	background-color: rgba(107,153,205, 0.8) !important;
+}
+
+	.gryslttxt figcaption small {
+		display: contents;
+		font-size: 12px;
+	}
+
+.grylist .item figure img {
+	transform: scale(1.4);
+	transition: all ease 1s;
+}
+
+.grylist .item:hover figure,
+.grylist .item:focus figure {
+	transition: all ease 400ms;
+}
+
+	.grylist .item:hover figure img,
+	.grylist .item:focus figure img {
+		transform: scale(1.4);
+		transition: all ease 1s;
+	}
+
+.grylist.hover {
+	transition: all ease 1s;
+	/*   opacity:.7; */
+}
+
+	.grylist.hover .item {
+		opacity: .9;
+		filter: blur(1px);
+	}
+
+		.grylist.hover .item:hover,
+		.grylist.hover .item:focus {
+			opacity: 1;
+			filter: blur(0);
+		}
+
+.grylist .item figcaption {
+	position: absolute;
+	font-size: 18px;
+	color: #fff;
+	width: 100%;
+	height: 100%;
+	padding: 10%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	top: 0;
+	left: 0;
+	transform: scale(1.3);
+	filter: blur(4px);
+	opacity: 0;
+	transition: 500ms;
+	background-color: rgba(107,153,205, 0.6);
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.grylist .item:hover figcaption,
+.grylist .item:focus figcaption {
+	transform: scale(1);
+	filter: blur(0);
+	opacity: 1;
+	transition: 300ms;
+}
+
+
+.gallery-image{
+	width: 100% 
+}
+@media (max-width:1368px) {
+	.grylist .item {
+		width: 276px;
+	}
+}
+
+@media (max-width:1080px) {
+	.grylist .item {
+		width: 33.3%;
+	}
+}
+
+@media (max-width:800px) {
+	.grylist .item {
+		width: 50%;
+	}
+
+		.grylist .item figure {
+			height: 250px;
+		}
+
+			.grylist .item figure img {
+				transform: rotate(0) scale(1);
+				transition: all ease 1s;
+				width: auto;
+				min-width: 100%;
+				height: 100%;
+				min-height: 250px;
+			}
+
+		.grylist .item:hover figure img {
+			transform: rotate(0) scale(1);
+		}
+}
+
+@media (max-width:500px) {
+	.grylist .item {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+
+		.grylist .item figure {
+			height: 250px;
+		}
+}
+
+
+@media screen and (max-width:799px) {
+
+	section.module.parallax {
+		height: 300px;
+		padding: 100px 0px;
+	}
+
+	.gry-mb799 .col-md-4 {
+		-ms-flex: 0 0 50%;
+		flex: 0 0 50%;
+		max-width: 50%;
+	}
+}
+
+
+@media screen and (max-width:676px) {
+
+
+	.gry-mb799 .col-md-4 {
+		-ms-flex: 0 0 80%;
+		flex: 0 0 80%;
+		max-width: 80%;
+		margin: 0px auto;
+	}
+
+	.grycard-dgn {
+		height: auto;
+	}
+
+	.card__image img {
+		max-width: 100%;
+		height: auto;
+		width: 100%;
+	}
+
+
+	.card__heading {
+		position: relative;
+		bottom: -10px;
+		left: -11px;
+	}
+
+	.gryimg-bg img{
+		width: 86%;
+    margin: 57px 0px 0px 61px;
+	}
+}

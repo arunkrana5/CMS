@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+@{
+    string DesignKey = "design" + clsApplicationSetting.GetWebConfigValue("DesignKey") + "/";
+    string Prefix = "~/assets/";
+
+    string Version = clsApplicationSetting.GetWebConfigValue("Version");
+    string AbsolutePath = HttpContext.Current.Request.Url.AbsolutePath;
+    string ProjectName = "";
+    List<MetaTags.Web> SEOobj = clsApplicationSetting.GetSEODetails();
+    ProjectName = SEOobj.Where(x => x.MetaName.ToLower() == "title").Select(x => x.MetaValue).FirstOrDefault();
+
+    List<WebMenu.List> AllMenuList = clsApplicationSetting.GetWebMenu("");
+
+
+    IHomeHelper Home = new HomeModal();
+    GetBannerResponse getBannerResponse = new GetBannerResponse();
+    getBannerResponse.InnerPageURL = AbsolutePath;
+    Banner.Web InnerBanner = Home.GetBanner_WebList(getBannerResponse).FirstOrDefault();
+
+
+
+}
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="Thrivera - ">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ProjectName </title>
+    @if (SEOobj != null)
+    {
+        foreach (var item in SEOobj)
+        {
+            <meta name="@item.MetaName" content="@item.MetaValue" />
+        }
+    }
+
+    <meta property="og:title" content="@ViewBag.twittertitle" />
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="@ViewBag.twitterImage" />
+    <meta property="og:url" content="@ViewBag.twitterURL" />
+    <meta property="og:description" content="@ViewBag.description" />
+    <meta name="twitter:site" content="@ViewBag.twittertitle">
+    <meta name="twitter:creator" content="@AbsolutePath">
+    <meta name="twitter:url" content="@ViewBag.twitterURL">
+    <meta name="twitter:title" content="@ViewBag.twittertitle">
+    <meta name="twitter:description" content="@ViewBag.description">
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="@Url.Content(Prefix +DesignKey+"/images/favicon.png")?v=@Version" type="image/png" sizes="50x50">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/slick.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/logo-showcase.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/style.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "owlcarousel/css/owl.carousel.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/animate.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "assets/css/dynamic-mobmenu.css"))
+
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/mobmenu-icons.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/bootstrap.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/dweb.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/font-awesome.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "assets/css/dynamic-mobmenu.css"))
+
+    @RenderSection("style", required: false)
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/custom.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + DesignKey + "css/responsive.css"))
+
+
+</head>
+<body class="home page-template" id="common-page">
+
+    <div id="dvMaskFullpage" style="display: none;">
+        <div class="page-loader-component">
+            <div class="lds-roller">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <p class="loading-img">
+
+                    @Html.CreateImage("/assets/" + DesignKey + "/img/logo.png", "logo", "")
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fulid-responsive header-part">
+        <div class="col-md-12 no-padding top-header">
+            <div class="col-md-10">
+                <section class="text-2 widget_text">
+                    <div class="textwidget">
+                        <div class="top-header">
+                            <ul style="margin: 0px;">
+                                <li class=" menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown nav-item nav-item-login">
+                                    <a href="job-board/">Job Board</a>
+                                </li>
+                                <li id="login"
+                                    class=" menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown nav-item nav-item-login">
+                                    <a href="#">Login</a>
+                                    <ul class="dropdown-menu depth_0_1" style="padding: 0px; margin:0px;">
+                                        <li>
+                                            <a class="dropdown-item" href="http://103.209.145.69/Payroll"
+                                               target="_blank" rel="noopener">Client Login</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="http://103.209.145.69/Payroll/emplogin.aspx"
+                                               target="_blank" rel="noopener">Employee Login</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li id="download"
+                                    class=" menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown nav-item nav-item-login">
+                                    <a href="download/" target="" rel="noopener">Download</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <section class="search-3 widget_search">
+                    <form class="form-inline mb-3" role="search" method="get" id="searchform"
+                          action="">
+                        <input class="form-control mr-sm-1" type="text" value="" placeholder="Search..." name="s"
+                               id="s">
+                        <button type="submit" id="searchsubmit" value="Search" class="btn btn-primary">
+                            <svg class="svg-inline--fa fa-search fa-w-16" aria-hidden="true" data-fa-processed=""
+                                 data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 512 512">
+                                <path fill="currentColor"
+                                      d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z">
+                                </path>
+                            </svg><!-- <i class="fas fa-search"></i> -->
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-md navbar-light bg-light nopadding">
+            <div class="col-md-12">
+
+                <div class="row">
+                    <div class="col-md-5 text-left header-logo">
+                        <a href="">
+                            @Html.CreateImage("/assets/" + DesignKey + "/img/logo.png", "logo", "img-responsive ml-3")
+                        </a>
+                    </div>
+                    @(Html.Partial("_MenuPartial", AllMenuList.Where(x=>x.MenuType=="Top").ToList()))
+
+                </div>
+            </div>
+
+        </nav>
+
+
+
+    </div>
+    @if (InnerBanner != null)
+    {
+        <img src="@InnerBanner.BannerURL" alt="" />
+        <div class="as-caption">
+            <div class="container">
+                <h1><span>@InnerBanner.Heading</span></h1>
+                <div class="clearfix"></div>
+                <div class="as-captiontitle"> <span>@InnerBanner.SubHeading</span> </div>
+                <div class="clearfix"></div>
+                @if (!string.IsNullOrEmpty(InnerBanner.GoToURL))
+                {
+                    <a href="@InnerBanner.GoToURL">Click</a>
+                }
+            </div>
+        </div>
+    }
+    @RenderBody()
+
+    <div class="clearfix"></div>
+
+
+    @Html.Partial("_FooterPartial" + clsApplicationSetting.GetWebConfigValue("DesignKey") + "", AllMenuList.Where(x => x.MenuType == "Bottom").ToList())
+
+    <div class="clearfix"></div>
+    <div id="toast">
+        <div id="toasticon"><i></i></div>
+        <div id="toastMsg"></div>
+    </div>
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/jquery.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/jquery-migrate.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/animate.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/mobmenu.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/all.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/scripts.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/modernizr.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/popper.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/bootstrap.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/dweb.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/wp-embed.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/slick.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "owlcarousel/js/owl.carousel.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/jquery.strongslider.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + DesignKey + "js/controller.min.js"))
+
+
+
+
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "/PageJs/Layout.js"))
+
+
+
+    @RenderSection("scripts", required: false)
+
+    <script>
+        var animate = new Animate({
+            target: '[data-animate]',
+            animatedClass: 'js-animated',
+            offset: [0.5, 0.5],
+            delay: 0,
+            remove: true,
+            scrolled: false,
+            reverse: false,
+            onLoad: true,
+            onScroll: true,
+            onResize: false,
+            disableFilter: false,
+            callbackOnInit: function () { },
+            callbackOnInView: function (el) { },
+            callbackOnAnimate: function (el) { },
+        });
+        animate.init();
+    </script>
+    <script>
+        $('.slider-for').slick({
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            arrows: false,
+            fade: true,
+            asNavFor: '.slider-nav'
+        });
+        $('.slider-nav').slick({
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            asNavFor: '.slider-for',
+            dots: true,
+            focusOnSelect: true
+        });
+
+        $('a[data-slide]').click(function (e) {
+            e.preventDefault();
+            var slideno = $(this).data('slide');
+            $('.slider-nav').slick('slickGoTo', slideno - 1);
+        });
+    </script>
+   
+
+    <noscript>
+        <p class="NojavaScript">Javascripts is disabled</p>
+    </noscript>
+
+</body>
+</html>

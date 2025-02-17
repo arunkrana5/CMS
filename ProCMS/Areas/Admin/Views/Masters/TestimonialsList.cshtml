@@ -1,0 +1,132 @@
+﻿
+@model IList<Testimonials.Admin.List>
+
+@{
+    string DesignKey = "design" + clsApplicationSetting.GetWebConfigValue("DesignKey") + "/";
+    string Prefix = "/Areas/Admin/assets/";
+}
+
+@section style{
+    @Html.IncludeVersionedCss(Url.Content(Prefix + "vendors/datatables/dataTables.bootstrap4.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + "vendors/datatables/buttons.bootstrap4.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + "vendors/datatables/responsive.bootstrap4.min.css"))
+}
+
+<div>
+    @Html.Partial("ListHeader_Partial", "Testimonials List")
+
+
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="card p-0">
+                <div class="card-body p-0">
+
+                    <div class="x_content table-currency">
+                        <input type="hidden" id="hdnAddUrl" name="hdnAddUrl" value="@Url.Action("TestimonialsAdd",new { src = clsCommon.Encrypt(ViewBag.MenuID+"*"+"/Admin/Masters/TestimonialsAdd"+"*0") })" />
+                        <div class="table-responsive">
+                            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap tbltick new_width" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>S.no.</th>
+                                        <th>Action</th>
+                                        <th>Image</th>
+                                        <th>Priority</th>
+
+                                        <th>Heading</th>
+                                        <th>Description</th>
+                                        <th>Inserted Date</th>
+                                        <th>Updated Date</th>
+                                        <th>IP Address</th>
+                                    </tr>
+                                    <tr class="searchbar">
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+
+                                        <th class="searchhide"></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th> </th>
+                                        <th> </th>
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @{ int Count = 0;}
+                                    @foreach (Testimonials.Admin.List item in Model)
+                                    {
+                                        Count++;
+                                        <tr class="@(item.IsActive == true?"": "trrowred")">
+                                            <td>
+                                                @Count
+                                                <input type="hidden" name="I" value="@item.TestimonialID" />
+                                                <input type="hidden" name="N" value="@item.Heading" />
+                                            </td>
+                                            <td>
+                                                <input type="hidden" id="hdn_@item.TestimonialID" value="@item.Heading" />
+                                                @if (clsApplicationSetting.GetSessionValue("Modify") == "True")
+                                                {
+                                                    @Html.Raw(item.IsActive == true
+                                   ? "<a  data-toggle='tooltip' data-original-title='Click to DeActivate' list='Testimonials_IsActive' OP='0' class='AIsActive' > <i class='fa fa-check-circle checkgreen' aria-hidden='true'></i></a>"
+                                   : "<a data-toggle='tooltip' data-original-title='Click to Activate' list='Testimonials_IsActive' OP='1'  class='AIsActive' > <i class='fa fa-times-circle crossred' aria-hidden='true'></i></a>")
+
+                                                    <a title="Edit" href="@Url.Action("TestimonialsAdd",new { src= clsCommon.Encrypt(ViewBag.MenuID+"*"+"/Admin/Masters/TestimonialsAdd"+"*"+item.TestimonialID) })" data-toggle='tooltip'> <i class="fa fa-pencil-square-o checkgreen" aria-hidden="true"></i> </a>
+                                                }
+
+                                            </td>
+                                            <td>
+                                                <img src="@item.DocURL" class="Listimage" />
+                                            </td>
+                                            <td>
+
+                                                @Html.Raw(clsApplicationSetting.GetSessionValue("Modify") == "True" ? "<input type='number' class='listpriority' list='Testimonials_Priority' value=\"" + item.Priority + "\" />" : item.Priority.ToString())
+                                            </td>
+
+
+                                            <td>@item.Heading</td>
+                                            <td> @item.Description</td>
+
+                                            <td>@item.createdat</td>
+                                            <td>@item.modifiedat</td>
+
+                                            <td>@item.IPAddress</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts    {
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/jquery.dataTables.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/dataTables.bootstrap4.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/dataTables.buttons.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.bootstrap4.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/jszip.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/pdfmake.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/vfs_fonts.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.html5.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.print.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.colVis.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "scripts/ListSetting.js"))
+
+
+
+    <script>
+
+     
+
+    </script>
+}

@@ -1,0 +1,24 @@
+﻿@model IList<WebMenu.Admin.MenuURLType>
+
+<div class="card multicard mb-4 shadow-box">
+    <div class="card-header blk-gdn-btn "><div>@ViewBag.URLType List</div></div>
+    <div class="card-body">
+
+        <ul id="MenuTreeView" class="menutreeview list-unstyled">
+            @if (Model != null)
+            {
+                foreach (WebMenu.Admin.MenuURLType item in Model)
+                {
+                    <li>
+                        <input type="radio" id="@(item.Name.Replace(" ","")+"_"+ @item.ID)" name="CmsRadio" @(ViewBag.MenuURL.ToLower() == @item.URL.ToLower() ? "checked" : "") onclick="saveCMSURL(@item.ID,'@item.URL')" />
+                        <label for="@(item.Name.Replace(" ","")+"_"+ @item.ID)" class="radio-label"></label>
+                        @item.Name
+                    </li>
+                }
+            }
+
+
+        </ul>
+    </div>
+</div>
+

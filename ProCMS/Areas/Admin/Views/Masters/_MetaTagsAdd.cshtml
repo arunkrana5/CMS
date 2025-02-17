@@ -1,0 +1,39 @@
+﻿
+@model MetaTags.Admin.Add
+
+@using (Ajax.BeginForm("_MetaTagsAdd", "Masters",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "_MetaTagsAddForm" })
+    )
+{
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+        <label>URL<sup>*</sup></label>
+        @Html.TextBoxFor(model => model.PageURL, new { @class = "form-control", @placeholder = "Enter Page URL" })
+        @Html.ValidationMessageFor(model => model.PageURL, "", new { @class = "text-danger" })
+    </div>
+   
+    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+        <label>Meta Name <sup>*</sup></label>
+        @Html.TextBoxFor(model => model.MetaName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.MetaName, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+        <label>Content <sup>*</sup></label>
+        @Html.TextAreaFor(model => model.MetaValue, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.MetaValue, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+        @if (Model.MetaTagsID > 0)
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+        }
+    </div>
+</div>
+}
+

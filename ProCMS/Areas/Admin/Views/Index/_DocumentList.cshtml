@@ -1,0 +1,34 @@
+﻿
+@model IList<Document.List>
+
+<ul id="documentul" class="upl-img row">
+    @foreach (Document.List item in Model)
+    {
+    <li class="col-md-4">
+        <input type="hidden" name="hdnDocID" value="@item.DocID" />
+        <input type="hidden" name="hdnDocName" value="@item.Name" />
+        <input type="hidden" name="hdnDocTypeID" value="@item.DocTypeID" />
+        <div class="upl-img-dtl">
+            <div class="upl-img">
+                <img src="@item.DocURL" class="img-responsive" />
+                <a class="docnam">@item.Name</a>
+            </div>
+            <div class="parentDiv">
+                <div class="input-group">
+                    <span class="input-group-addon copy-btn DocURLCopy" title="Copy Url">
+                        <i class="fa fa-files-o" aria-hidden="true"></i>
+                    </span>
+                    <input type="text" class="form-control" name="txtURLCopy" value="@item.DocURL" placeholder="Url">
+                    <a class="cls-icon DeleteDocument"><i class="fa fa-trash-o"></i></a>
+                </div>
+                <div class="slt-img">
+                    <label for="rdoSingle_@item.DocID">Select This</label>
+                    <input type="radio" id="rdoSingle_@item.DocID" name="rdoSelect" class="radio rdosingleselection" />
+                </div>
+
+            </div>
+        </div>
+
+    </li>
+    }
+</ul>

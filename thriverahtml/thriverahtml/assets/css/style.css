@@ -1,0 +1,1201 @@
+/*
+ Theme Name:   Dweb - Child Theme
+ Theme URI:    http://www.darteweb.com 
+ Description:  Dweb Bootstrap 4 Theme for WordPress
+ Author:       DWEB
+ Author URI:   http://example.com
+ Template:     twentyfifteen
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags:         light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+ Text Domain:  twenty-fifteen-child
+*/
+
+ @font-face {
+     font-family: Roboto-Black;
+     src: url(../fonts/Roboto-Black.ttf);
+}
+ @font-face {
+     font-family: HelveticaLTStd-Roman;
+     src: url(../fonts/HelveticaLTStd-Roman.ttf);
+}
+ h1,h2,h3,h4,h6,nav ul#menu-menu-1 {
+     font-family: Roboto-Black !important;
+}
+ p {
+     font-family: HelveticaLTStd-Roman;
+     font-size: 19px;
+     line-height: 1.2;
+     letter-spacing: 1px;
+}
+ h4 {
+     color: #0e3b5b !important;
+     letter-spacing: 3px;
+     line-height: 1.2 !important;
+}
+.banner-thrivera-home {
+    background: url(../img/home-page-banner.jpg) no-repeat left;
+    width: 100%;
+    min-height: 591px;
+    background-position: 74%;
+}
+ .nopadding,ul.dropdown-menu.depth_0,.mobmenu-push-wrap, body.mob-menu-slideout-over{
+     padding:0px !important;
+}
+ul#menu-menu-1 li a.nav-link {
+    color: #fff;
+    letter-spacing: 3px;
+    font-size: 18px;
+    font-family: 'Roboto-Black';
+    padding-left: 10px;
+}
+
+ .home.page-template.page-template-home-templete.page-template-home-templete-php.page.page-id-8.wp-custom-logo {
+     background: url(../img/background-1.jpg);
+     background-repeat: repeat;
+}
+ ul#menu-menu-1 {
+     font-size: 20px;
+     padding-top: 0px;
+     margin: 0 auto;
+}
+ .banner-content {
+     position: absolute;
+     display: block;
+     vertical-align: baseline;
+     top: 288px;
+     float: left;
+     left: 10%;
+}
+ .banner-content p,.second-part p,.thrid-part-backgroun p {
+     color: #999999;
+}
+ button.btn.normal,input.wpcf7-form-control.wpcf7-submit {
+     background: #006699;
+     background-image: linear-gradient(to right,#0885DF 30%, #00ccff);
+     padding-left: 25px;
+     padding-right: 25px;
+     border: 1px solid #0C98E8;
+     border-radius: 58px;
+     color: #fff;
+     cursor: pointer;
+}
+ .thrid-part h3,.fourth-part h3,.fifth-part h3,.sixth-part h3 {
+     font-size: 36px;
+     line-height: 1.2;
+     color: #0E3B5B;
+     font-weight: bolder;
+     letter-spacing: 4px;
+     margin-bottom: 25px;
+}
+ .thrid-part,.fifth-part {
+     padding-top: 50px;
+     padding-bottom: 70px;
+}
+ .banner-content h3 {
+     font-size: 50px;
+     color: #003366;
+     text-align: left;
+     margin-bottom: 28px;
+     line-height: 1.2;
+     font-weight:bold;
+     letter-spacing:4px;
+    ;
+}
+ .content-part-of-thrid {
+     position: absolute;
+     left: 20%;
+     top: 8%;
+}
+ .col-md-6.thrid-part-backgroun.text-right {
+     padding: 0px !important;
+     right: -35px;
+     top: 20px;
+}
+ .animation-images {
+     left: -35px;
+     padding: 0px !important;
+}
+ p.our-solution {
+     font-size: 18px;
+     margin-top: 44px;
+     color: #0E3B5B;
+}
+ .thrid-part .col-md-6 img {
+     border-radius: 11px 11px 14px 20px;
+}
+ .fourth-part {
+     background: url(../img/fourth-image.jpg);
+     min-height: 500px;
+     background-repeat: repeat;
+     background-size: cover;
+}
+ .sixth-part.text-center {
+     background: url(../img/sixth-banner-image-2.jpg);
+     background-size: cover;
+     background-repeat: no-repeat;
+     padding: 0px 0px 30px 0px;
+}
+ .fourth-part .col-md-6 {
+     margin-top: 20px;
+}
+ .list-style p {
+     color: #0E3B5B;
+     font-size: 20px;
+     font-weight: 800;
+}
+ .list-style img {
+     padding-right: 10px;
+}
+ .wpls-logo-showcase .slick-dots{
+     display:none !important;
+}
+ h3.testimonial-heading {
+     position: absolute;
+     bottom: 0px;
+     text-align: center !important;
+     padding-bottom: 10px;
+     width: 100%;
+     right: 0px;
+     margin: 0 auto;
+     font-size: 20px;
+}
+ .strong-view.default .testimonial-heading {
+     background: none !important ;
+     padding-left:0px !important;
+}
+ .testimonial-inner {
+     margin-bottom: 20px;
+}
+ .testimonial.t-slide{
+     background: #fff;
+}
+ .banner-content,.social-media-section svg,.small-menu a {
+     color:#fff;
+}
+ .testimonial-content p {
+     text-align: center;
+}
+ .testimonial-part img {
+     display: block;
+     position: relative;
+     top: 40px;
+     right: 0px;
+     left: -27px;
+     z-index: 999;
+}
+
+body .navbar-light .navbar-toggler {
+    color: rgba(0,0,0,.5);
+    line-height: normal;
+    height: auto;
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    top: 10px;
+    border: 2px solid #27aae0;
+    position: relative;
+}
+
+ button.navbar-toggler.collapsed {
+     background: #f2f2f2;
+     height: 100%;
+     top: 40px;
+     position: relative;
+}
+ a.nav-link:before {
+     content: "•";
+     position: absolute;
+     top: 68%;
+     left: 44%;
+     color: transparent;
+     text-shadow: transparent 0px 0px;
+     font-size: 23px;
+     transform: translateX(-50%);
+     pointer-events: none;
+     transition: text-shadow 0.3s ease 0s, color 0.3s ease 0s;
+}
+ .top-header {
+     padding: 5px 0px 0px 0px;
+     text-align: right;
+     background:#f8f9fa!important 
+}
+ .top-header a {
+     color: #999999;
+     margin-right: 15px;
+     text-decoration: none;
+}
+ .second-part .col-md-12 .mb-3 {
+     width: 35%;
+     margin: auto;
+     display: block;
+}
+ footer.bg-light {
+     background: #37556d !important;
+     color: #fff;
+}
+ h2.h4 {
+     margin-bottom: 20px;
+}
+/* search box */
+ .form-inline {
+     width: 400px;
+     position: absolute;
+     right: -6%;
+     top: -3%;
+     transform: translate(0%, 0%);
+     background-color: #27AAE1;
+     border-radius: 40px;
+     display: flex;
+     z-index:999;
+}
+ .form-inline{
+     width: auto;
+}
+ .form-inline .form-control {
+     flex: 1;
+     background-color: transparent;
+     outline: none;
+     border-color: transparent;
+     border: 0px;
+     color: white;
+     line-height: 20px;
+     font-size: 18px;
+     width: 0;
+     text-indent: 20px;
+     transition: all 1s;
+     margin-right: -26px !important;
+}
+ .form-inline:hover .form-control {
+     width: 220px;
+     transition: all 1s;
+}
+ .widget_search button#searchsubmit {
+     flex: 0;
+     background-color: #0E3C5B;
+     outline: none;
+     border-color: transparent;
+     padding: 10px;
+     border-radius: 50px;
+     transition: all .4s;
+     border:none;
+}
+ .widget_search button#searchsubmit:active {
+     background-color: #27AAE1;
+     transition: all .4s;
+}
+ .wpls-logo-showcase img.wp-post-image {
+     box-shadow: 0 10px 10px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+     margin-bottom:10px;
+}
+ .thrid-part .col-md-12 {
+     animation-direction: alternate-reverse;
+     -webkit-animation: myfirst 5s 2;
+     -webkit-animation-direction: alternate;
+     animation: myfirst 5s 2;
+     animation-direction: alternate;
+}
+ ul#menu-menu-1 li a:hover{
+     color:#003366 !important;
+}
+ button.btn.normal:hover,input.wpcf7-form-control.wpcf7-submit:hover {
+     background: #006699;
+     background-image: linear-gradient(to left,#0885DF 30%, #00ccff);
+     left: 12px;
+}
+ footer p {
+     font-size: 16px;
+     line-height: 1.9;
+}
+ button.btn.normal:after,.search-results a.btn.btn-primary:after {
+     content: "\f054";
+     font-family: FontAwesome;
+     left: 9px;
+     font-size: 14px;
+     z-index: 1;
+     position: relative;
+     top: 1px;
+}
+ button.btn.normal:hover:after,.search-results a.btn.btn-primary:hover:after {
+     left: 15px;
+     transition: 0.5s;
+}
+ .widget_text h2.h4 {
+     font-size: 20px;
+}
+ .useful-links{
+     font-size:20px !important;
+}
+ .header-nav-bar {
+     background-color: #0e3b5b;
+     border-bottom: 5px solid #27aae0;
+}
+ ul#menu-menu-1 li a:hover, .small-menu:hover {
+     color: #fff !important;
+     background: #27aae0;
+	 text-decoration:none;
+}
+ li.menu-item {
+     margin-right: 40px;
+	 margin-left:40px;
+}
+ .header-logo {
+     position: relative;
+     top: -17px;
+}
+ .has-post-thumbnail header.mb-4 {
+     position: absolute;
+     display: block;
+     top: 223px;
+     left: 15%;
+     color: #0e3b5b;
+}
+ .page-id-18 header.mb-4 {
+     color: #fff;
+}
+ header h1 center {
+     font-size: 51px;
+     font-weight: 600;
+}
+ .social-media-section {
+     background: #ebebeb;
+     padding: 5px;
+}
+ .our-management-team {
+     margin-top: 100px;
+     margin-bottom: 50px;
+}
+ .name-our-management p.paregraph,.why-we-are-page p,.page-section-template p{
+     color: #969696;
+     margin-bottom: 16px;
+}
+ .social-media-heading h3, .social-media-heading p,.why-we-are-page h3,.page-section-template h3,.list-style p,.search-results h3 {
+     color: #0e3b5b;
+     font-weight: bold;
+     line-height: 1.2;
+     letter-spacing: 3px;
+}
+ .col-md-6.why-we-are-backgroun.text-right {
+     padding: 0px !important;
+     right: -30px;
+     top: 33px;
+}
+ .col-md-6.second-why-we-are-left {
+     left: -35px;
+     padding: 0px !important;
+     top: 140px;
+}
+ .col-md-6.second-why-we-are-backgroun {
+     padding: 0px !important;
+     right: -30px;
+     top: 115px;
+}
+ .content-part-of-why-we-are.left {
+     left: 11%;
+}
+ .content-part-of-why-we-are {
+     position: absolute;
+     left: 18%;
+     top: 3%;
+     text-align: left;
+}
+ .why-we-are-section-2 {
+     background: #ebebeb;
+     color: #37556d;
+     margin-top: 200px;
+     overflow: hidden;
+     padding: 50px;
+}
+ h3.testimonial-heading {
+     position: absolute;
+     top: 0px;
+     font-size: 25px;
+     margin-top: 10px !important;
+}
+ .testimonial-content {
+     margin-top: 37px;
+}
+ .testimonial.t-slide.post-326 {
+     background: #fff;
+     border: 1px solid #ccc !important;
+     box-shadow: 2px 2px #ccc ;
+     top: 1px;
+     position: relative;
+}
+/*contact-form*/
+ form.wpcf7-form {
+     display: block;
+     text-align: center;
+}
+ input.wpcf7-form-control.wpcf7-text,textarea.wpcf7-form-control.wpcf7-textarea {
+     background: #aabac8;
+     border: 0px;
+     padding: 9px;
+}
+ .contact-form-page .col-md-4 {
+     background: #f6fafe;
+     padding: 30px;
+}
+ input::-webkit-input-placeholder,textarea::-webkit-input-placeholder {
+     color: #fff !important;
+}
+ .contact-form-page svg {
+     color: #000;
+}
+ .careers-title,.why-us-title {
+     position: absolute;
+     top: 193px;
+     left: 11%;
+     font-size: 40px;
+     letter-spacing: 4px;
+}
+ .page-id-275 header.mb-4,.page-id-18 header.mb-4,.page-id-16 header.mb-4,.page-id-630 header.mb-4 , .page-id-689 header.mb-4, .page-id-727 header.mb-4 {
+     display: none !important;
+}
+ .why-us-contant
+/*.our-mgt-page*/
+ {
+     position: relative;
+     padding: 85px 20px 85px 10px;
+     position: relative;
+     background: #e8eef8;
+}
+ .why-us-contant:after {
+     content: " ";
+     position: absolute;
+     display: block;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     right: 0;
+     z-index: -1;
+     background: #e8eef8;
+     transform-origin: top left;
+     -ms-transform: skew(-30deg, 0deg);
+     -webkit-transform: skew(-30deg, 0deg);
+     transform: skew(-20deg, 0deg);
+     z-index: -1;
+}
+ .why-us-contant-left:after,.connect-app:after {
+     content: " ";
+     position: absolute;
+     display: block;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     right: 0;
+     z-index: -1;
+     background: #e8eef8;
+     transform-origin: bottom left;
+     -ms-transform: skew(-30deg, 0deg);
+     -webkit-transform: skew(-30deg, 0deg);
+     transform: skew(-20deg, 0deg);
+     z-index: -1;
+}
+.img-part-why-us {
+    border: 1px solid transparent;
+    box-shadow: 0 11px 168px rgba(214, 232, 244, 5), 0 11px 169px rgba(214, 232, 244, 5);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,5);
+    margin: auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 50%;
+    width: 30%;
+    height: auto;
+    margin-bottom: 45px;
+    margin-top: 70px;
+}
+ .why-us .row,.our-solution-section .row {
+     border: 0px solid;
+     box-shadow: 4px 4px #ccc;
+     box-shadow: 0 1px 1px rgba(214, 232, 244, 1), 0 1px 10px rgba(214, 232, 244, 1);
+}
+/*connect-app*/
+ .connect-app-page .connect-second-part {
+     background: url(../../../wp-content/uploads/2018/11/connect-app-center.jpg);
+     min-height: 700px;
+     background-repeat: repeat;
+     background-size: cover;
+}
+ .connect-app h3.mb-3,.connect-app-left h3 {
+     font-size: 20px;
+}
+ .connect-app,.connect-app-left {
+     padding: 30px 20px 5px 10px;
+     position: relative;
+     background: #e8eef8;
+     min-height: 181px !important;
+	 margin-left: 1px;
+}
+.connect-app-left{margin-left:0px;}
+ .connect-app:after {
+     content: " ";
+     position: absolute;
+     display: block;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     right: 0;
+     z-index: -1;
+     background: #e8eef8;
+     transform-origin: top left;
+     -ms-transform: skew(-30deg, 0deg);
+     -webkit-transform: skew(-30deg, 0deg);
+     transform: skew(-20deg, 0deg);
+     z-index: -1;
+     min-height: 181px;
+}
+ .connect-app-left:after {
+     content: " ";
+     position: absolute;
+     display: block;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     right: 0;
+     z-index: -1;
+     background: #e8eef8;
+     transform-origin: bottom right;
+     -ms-transform: skew(-30deg, 0deg);
+     -webkit-transform: skew(-30deg, 0deg);
+     transform: skew(-20deg, 0deg);
+     z-index: -1;
+     min-height: 181px;
+}
+ .connect-app-page img.img-fuild {
+     border: 1px solid transparent;
+     border-radius: 150px;
+     box-shadow: 0 11px 70px rgba(214, 232, 244, 1), 0 11px 129px rgba(214, 232, 244, 1);
+     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+ .connect-app-page .col-md-6 .row {
+     border: 0px solid;
+     box-shadow: 0 1px 1px rgba(214, 232, 244, 1), 0 1px 1px rgba(214, 232, 244, 1);
+     margin-right: 4px;
+     margin-bottom: 26px;
+}
+/*our management team*/
+ .our-mgt-page{
+     background: url(../../../wp-content/uploads/2018/11/background-1.png);
+     background-size:cover;
+}
+ .col-md-9.mx-auto.name-of-management {
+     left: -35px;
+     transform: skew(-1deg);
+     margin-top: 33px;
+     top: -7px;
+     padding: 11px 48px 2px;
+}
+ .col-md-9.mx-auto.name-of-management:after {
+     content: "";
+     display: block;
+     background: #969696;
+     left: -12px;
+     transform: skew(-13deg);
+     margin-top: 41px;
+     padding-left: 35px;
+     width: 100%;
+     margin-top: 61px;
+     height: 100%;
+     top: -63px;
+     z-index: -1;
+     position: absolute;
+}
+ .right-side-img {
+     background: url(../../../wp-content/uploads/2018/11/section-1.png);
+     background-size: cover;
+     background-repeat: round;
+}
+/*careers*/
+ .down-image-carrer {
+     font-size: 20px;
+     position: relative;
+     background: #e8eef8;
+     top: -131px;
+     padding: 0px 0px 70px 0px;
+}
+ .down-image-carrer:before {
+     content: "";
+     display: block;
+     border-top: 19px solid transparent;
+     border-bottom: 100px solid transparent;
+     transform: skew(180deg,-12deg);
+     left: 0px;
+     top: 0;
+     z-index: -1;
+     background: #e8eef8;
+     transform-origin: bottom left;
+}
+ .career-contant.col-md-11 {
+     position: absolute;
+     display: block;
+     top: 288px;
+     padding: 23px;
+}
+ .dropdown:hover .dropdown-menu, .btn-group:hover .dropdown-menu {
+     display: block;
+     transition: 1.3s ease;
+}
+ .dropdown-menu{
+     margin-top: 0;
+}
+ .dropdown-toggle{
+     margin-bottom: 2px;
+}
+ .navbar .dropdown-toggle, .nav-tabs .dropdown-toggle{
+     margin-bottom: 0;
+}
+ ul.dropdown-menu.depth_0 .menu-item {
+     margin: 0px;
+}
+ li#menu-item-391 {
+     border-top: 5px solid #37556d !important;
+     margin-top: -8px;
+     padding: 0px;
+}
+ .top-header ul li {
+    list-style: none;
+     display: inline-flex;
+}
+ ul.dropdown-menu.depth_0_1 li {
+    display: block;
+}
+ a.dropdown-item {
+    background-color: #0e3b5b;
+    color: #fff;
+    padding: 12px 16px 16px 16px;
+    text-align: left;
+    font-size: 14px;
+	letter-spacing: 1px;
+	border: 0px solid;
+    border-radius: 1px;
+     font-weight: 500;
+    font-family: HelveticaLTStd-Roman;
+}
+ .top-header a.dropdown-item:hover {
+     background: #27aae0;
+    color:#fff;
+}
+ .social-media-heading h3,.social-media-heading p {
+    font-weight: unset;
+    font-family: HelveticaLTStd-Roman !important;
+     letter-spacing: 0px !important;
+}
+ .active a.nav-link {
+     background: #27aae0;
+}
+ .form-inline .form-control {
+     display: inline-block;
+     width: 0px;
+     vertical-align: middle;
+}
+ .our-management-team .col-md-3 {
+	 margin-top: 25px;
+}
+ @media only screen and (min-width : 240px) {
+.wpcf7-textarea, .wpcf7-text {
+         max-width: 100%;
+         padding: 10px 16px !important;
+    }
+}
+ @media only screen and (max-width: 768px) {
+body#custom-80-page .banner-thrivera-home{
+      background-position:84% !important;
+ }	
+body#custom-90-page .banner-thrivera-home{
+	 background-position:94% !important;
+}	 
+.banner-content {
+    left: 10px;
+	top: 370px;	 
+}
+	 .banner-images img {
+}
+     .content-part-of-thrid {
+         left: 10%;
+    }
+     .col-md-6.thrid-part-backgroun.text-right {
+         right: 0px;
+    }
+     .animation-images {
+         left: 0px;
+    }
+     .banner-content p.text-center {
+         font-size: 12px;
+         line-height: 16px;
+    }
+     .banner-content h3 {
+         font-size: 20px;
+         margin-bottom: 0px;
+         line-height: unset;
+    }
+     .form-inline{
+         right:1%;
+    }
+     section.text-2.widget_text {
+         width: 70%;
+    }
+     .col-md-6.thrid-part-backgroun {
+         margin-bottom: 42px;
+         margin-top: 70px;
+    }
+     .thrid-part-backgroun{
+         right: -5px;
+    }
+     .second-part .col-md-12 .mb-3{
+         width:100%;
+    }
+     .fourth-part {
+         background: #D0D5D1;
+    }
+     .thrid-part-backgroun{
+         padding-bottom:21px;
+    }
+     .col-md-5.text-left {
+         width: 80%;
+         height: auto;
+         margin-top: 20px;
+         margin-bottom: 9px;
+    }
+     .banner-content p {
+         line-height: 21px;
+         margin-top: 5px;
+    }
+     .has-post-thumbnail header.mb-4 {
+         position: absolute;
+         display: block;
+         top: 180px !important;
+         left: 8% !important;
+    }
+     header h1 center {
+         font-size: 20px !important;
+         font-weight: 600;
+    }
+     .col-md-6.why-we-are-backgroun.text-right {
+         margin-bottom: 53px;
+    }
+     .our-management-team .col-md-2 img{
+         display: none;
+    }
+     .our-management-team .col-md-3 img {
+         margin: auto;
+         display: block;
+    }
+     .our-management-team .col-md-7 img.img-responsive {
+         height: 100%;
+         margin-top: 9px;
+    }
+     .contact-form-page .col-md-4{
+         margin-bottom:20px;
+    }
+     .content-part-of-thrid {
+         position: absolute;
+         left: 4%;
+         top: 1px;
+         font-size: 14px;
+    }
+     .why-us-contant:after, .col-md-12.connect-app:after , .col-md-12.why-us-contant-left:after, .col-md-12.connect-app-left:after,.mob-menu-logo-holder{
+         display:none;
+    }
+     .careers-title {
+         top: 280px !important;
+         font-size: 20px !important;
+         line-height: 1.2;
+    }
+
+     .career-contant.col-md-11 {
+         top: 170px !important;
+         padding: 38px;
+    }
+     .down-image-carrer{
+        padding:0px 0px 100px 0px;
+    }
+     .page-id-275 header.mb-4 h1,.page-id-18 header.mb-4 h1, .top-header ul li {
+        display: none;
+    }
+     .thrid-part h3, .fourth-part h3, .fifth-part h3, .sixth-part h3{
+        font-size:27px;
+    }
+     button.btn.normal,input.wpcf7-form-control.wpcf7-submit {
+         position: relative;
+         bottom: 11px;
+    }
+     .our-mgt-page {
+         background: #e8eef8;
+    }
+     .content-part-of-why-we-are {
+         top: -25px;
+         left: 5%;
+    }
+     p.mb-4{
+        font-size:16px;
+    }
+.content-part-of-why-we-are h3.mt-5
+{
+       margin-bottom: 8px !important;
+}
+ .second-why-we-are-left img.img-fluid,.why-we-are-backgroun img
+{
+    min-height: 290px;
+}
+     h3.mt-5,.post-330 h3.text-center.mt-3.mb-5 {
+        font-size: 18px !important;
+    }
+     .content-part-of-why-we-are.left {
+        left: 17%;
+         top: -25px;
+    }
+     .col-md-6.animation-images {
+         left: 5px !important;
+         width: 98%;
+    }
+     .col-md-6.why-we-are-backgroun.text-right {
+         padding: 0px !important;
+         right: -6px;
+         width: 98%;
+    }
+     .col-md-6.second-why-we-are-backgroun{
+        width:98%;
+         right: -4px;
+    }
+     .col-md-6.second-why-we-are-left{
+        left:2px;
+         width:98%;
+    }
+	 .why-we-are-backgroun .content-part-of-why-we-are {
+    left: 3%;
+}
+     .content-part-of-why-we-are.left {
+        left: 14%;
+    }
+     p{
+        font-size:17px;
+    }
+	 li.menu-item{margin:0px;}
+	 .explore-button {top: 180px !important;}
+	 .job-board { overflow: auto; white-space: nowrap;}
+
+svg.svg-inline--fa.fa-angle-right.fa-w-8 { 
+    left: -57px !important;
+	font-size:20px!important;
+    top: -8px !important;
+}	
+	 .connect-app-page .connect-second-part {background: #DAE7F0;}
+	 footer.bg-light,section.search-3.widget_search,.oursolution-connect-app.mt-5.mb-5 img {display: none;}
+	 
+	 .down-image-carrer {top: -89px;}
+	 
+button.btn.normal
+{
+    margin: auto;
+    margin-top: 20px;
+}
+.mob-menu-header-holder
+ {
+    background-color: transparent !important;
+    top: 49px !important;
+    right: 25px !important;
+	position:absolute !important;
+
+}
+
+.banner-content p { width: 59%; }
+.social-media-heading h3 { font-size: 23px;}
+.form-inline:hover .form-control{width:89%;}
+.widget_search button#searchsubmit,.form-inline .form-control{padding: 10px; border-radius: 0px; border: 1px solid;}
+.form-inline { width: 240px; border-radius: 0px; background-color: transparent;}
+.col.text-center { width: 70%; margin: auto; }
+.mobmenu_content #mobmenuright .sub-menu a {font-family: HelveticaLTStd-Roman !important;}	 
+.page-id-16 h3.careers-title,.page-id-614 header h1 center,.page-id-689 h3.careers-title { color: #fff; }
+.staffing .explore-button { top: 210px !important; }
+.oursolution-connect-app.mt-5.mb-5 {
+    background: url(https://thrivera.in/wp-content/uploads/2018/12/OUR-SOLUTIONS_CONNECT-APP-2.jpg)no-repeat;
+    min-height: 105px;
+    background-size: 100%;
+}
+
+
+}
+
+/*media query in 768*/
+
+ @media screen and (max-width: 1366px) {
+     .thrid-part-backgroun {
+         right: -54px;
+    }
+     .col-md-6.animation-images {
+        left: -39px;
+    }
+     .content-part-of-why-we-are {
+         left: 3%;
+		 width: 89%;
+
+    }
+ .content-part-of-why-we-are.left {
+    left: 14%;
+    width: 86%;
+    top: -23px;
+}
+     .col-md-9.mx-auto.name-of-management {
+        left: -17px;
+    }
+}
+ @media only screen and (min-width: 768px) {
+     .career-contant.col-md-11 {
+         position: absolute;
+         display: block;
+         top: 295px;
+         padding: 35px;
+    }
+     .down-image-carrer{
+        padding:0px,0px,100px,0px;
+    }
+
+}
+ @media screen and (min-width: 1920px) {
+     .content-part-of-thrid{
+        left:37%;
+    }
+}
+ .job-board {
+     background: #e8eef8;
+     padding: 34px 0px 70px;
+
+}
+ .job-board tr{
+     border-bottom: 1px solid #ddd;
+}
+ .job-board tr:first-child {
+     border-bottom: 0px solid #ddd;
+}
+ .job-board tr, th, td {
+    padding: 6px 31px 8px 25px;
+}
+ .pagination a {
+     color: black;
+     padding: 8px 16px;
+     text-decoration: none;
+}
+ .pagination {
+     float: right;
+     display: inline-flex;
+     width: 57%;
+     margin-top: 12px;
+}
+ .pagination a.active {
+     background-color: #37556d;
+     color: white;
+}
+ .job-board th {
+     color: #37556d;
+     letter-spacing: 1px;
+}
+ .pagination a:hover:not(.active) {
+     background-color: #ddd;
+     color: #000;
+     text-decoration: none;
+}
+ .page-id-630 img.img-fuild {
+     padding-top: 15px;
+}
+ .social-media-section img {
+     margin-right: -8px;
+}
+ input.wpcf7-form-control.wpcf7-submit {
+     padding-top: 9px;
+     padding-bottom: 9px;
+     width: 150px;
+}
+ .menu-item-has-children ul.dropdown-menu.depth_0
+{
+    margin: auto;
+    left: -25px;
+}
+
+.explore-button {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 228px;
+}
+footer.bg-light a {
+    color: #fff;
+    text-decoration: none;
+}
+footer.bg-light a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+input.wpcf7-form-control.wpcf7-submit {
+    outline: none;
+}
+.page-id-801 p.text-justify
+{
+    color: #969696;
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+.page-id-832  h5
+{
+    color: #0e3b5b !important;
+    letter-spacing: 1.5px;
+    line-height: 1.2 !important
+}
+.page-id-801 header h1 center,.page-id-832 header h1 center
+{
+	 color: #0e3b5b !important;
+    letter-spacing: 3px;
+    line-height: 1.2 !important;
+    font-size: 30px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+ul.disclaimer li {
+    list-style: none;
+    text-align: justify;
+    color: #969696;
+}
+ ul.disclaimer li:before {
+    content: "\f054";
+    font-family: FontAwesome;
+    left: -21px;
+    font-size: 14px;
+    z-index: 1;
+    position: relative;
+    top: 1px;
+    color: #37556d !important;
+}
+
+.job-board .border {
+    border: 1px solid #ddd !important;
+}
+@media (min-width: 1024px) and (max-width: 1280px)
+{
+	footer p{font-size:14px;}
+	p {font-size: 16px;}
+	ul#menu-menu-1 li a.nav-link { font-size: 15px;}
+	.career-contant h3 {font-size: 20px;}
+}
+@media (max-width: 1440px){ .content-part-of-why-we-are {left: 8%;} }
+
+@media screen and (min-width: 1100px) and (max-width:1152px) { .career-contant.col-md-11 {top: 225px !important;}.content-part-of-why-we-are {left: 3%;} }
+
+@media only screen and (max-width:1280px), (min-height:801px){ .career-contant.col-md-11 {top:284px;}	}
+
+/*Firefox*/
+  @-moz-document url-prefix()
+{
+		.career-contant.col-md-11{z-index:999;}
+		.down-image-carrer::before {z-index: 1;}
+	    .form-inline .form-control {flex: none;}
+	     .form-inline {right: -15%;}
+	  
+}
+.search-results h4 a {
+    color: #003366 !important;
+    letter-spacing: 2px;
+}
+.search-results article {
+    border: 1px solid #ddd;
+    width: 100%;
+    padding: 21px 25px;
+    margin-bottom: 20px;
+}
+.search-results a.btn.btn-primary
+{
+    background: #006699;
+    background-image: linear-gradient(to right,#0885DF 30%, #00ccff);
+    padding-left: 25px;
+    padding-right: 25px;
+    border: 1px solid #0C98E8;
+    border-radius: 58px;
+    color: #fff;
+    cursor: pointer;
+}
+.svg-inline--fa.fa-arrow-right.fa-w-14 {
+    display: none;
+}
+.search-results p {
+    color: #969696;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+.feature-image-mobile img.img-responsive {width: 100%;}	 
+.mobmenu .sub-menu li a{padding-left:3px !important;}
+
+@media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+.header-nav-bar{display:none;}
+.col-md-6.thrid-part-backgroun.text-right{right: -19px;}
+.col-md-6.animation-images{left: -20px !important;}
+.col-md-6.thrid-part-backgroun{margin:0px;}
+.form-inline:hover .form-control{width:89%;}
+.widget_search button#searchsubmit,.form-inline .form-control{padding: 10px; border-radius: 0px; border: 1px solid;}
+.form-inline { width: 240px; border-radius: 0px; background-color: transparent;}
+.has-post-thumbnail header.mb-4,.careers-title{top: 270px !important;}
+header h1 center,.careers-title,.banner-content h3{font-size:45px !important;}
+.col.text-center {width: 64%; margin: auto;}
+.col-md-9.mx-auto.name-of-management { left: -53px; transform: skew(13deg);}
+.name-of-management h5 {font-size: 20px !important;}
+.name-of-management	span{font-size: 18px !important;}
+}
+
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1024px) and (min-device-height : 1366px) and (max-device-height : 1366px) and (min-width: 1024px) and (max-width: 1024px)
+{
+	.header-nav-bar{display:none !important;}  
+	.col-md-6.thrid-part-backgroun.text-right{right:-10px;}
+	.header-logo {margin-top: 23px;}
+	.mob-menu-logo-holder,.top-header ul li,section.search-3.widget_search #searchsubmit{display:none;}
+	.mob-menu-header-holder{ background-color: transparent !important; top: 49px !important; right: 25px !important; position:absolute !important;}
+	.form-inline:hover .form-control{width:89%;}
+	.widget_search button#searchsubmit,.form-inline .form-control{padding: 10px; border-radius: 0px; border: 1px solid;}
+	.form-inline { width: 240px; border-radius: 0px; background-color: transparent;}
+	.has-post-thumbnail header.mb-4,.careers-title{top: 270px !important;}
+     header h1 center,.careers-title,.banner-content h3{font-size:45px !important;}
+	.col-md-9.mx-auto.name-of-management { left: 9px;}
+}
+ul.rightmbottom {
+    position: absolute;
+    right: 13px;
+	margin-top: 25px;
+}
+.why-us .col-md-4 img:before {
+    content: "";
+    display: block;
+    background: wheat;
+    border-radius: 150px;
+}
+.mobmenu_content ul li a {font-family: Roboto-Black !important;}
+#logo-slider .wp-post-image {
+    max-height: 250px;
+}
+#logo-slider .owl-prev {
+	width: 30px;
+	height: 30px;
+	line-height: 20px;
+	border-radius: 15%;
+	font-size: 42px;
+	padding: 0px;
+	position: absolute;
+	left: -28px;
+	top: 26%;
+	background: none;
+    color: #51585F;
+}
+#logo-slider .owl-next {
+	width: 30px;
+	height: 30px;
+	line-height: 20px;
+	border-radius: 15%;
+	font-size: 42px;
+	padding: 0px;
+	position: absolute;
+	right: -28px;
+	top: 26%;
+	background: none;
+    color: #51585F;
+}
+
+
+

@@ -1,0 +1,50 @@
+﻿
+@model BlogTags.Admin.Add
+
+@using (Ajax.BeginForm("_AddBlogTag", "Blog",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "_AddBlogTagForm" })
+    )
+{
+    
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-6 form-group">
+        <label>Tag Name<sup>*</sup></label>
+        @Html.TextBoxFor(model => Model.TagName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => Model.TagName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+        <label>Type URL<sup>*</sup></label>
+        <div class="input-group">
+            <input type="text" tag-value="@clsCommon.Encrypt("BlogTag")" tag-id="@Model.BlogTagID" name="txtURL" id="txtURL" value="@Model.TagURL" class="form-control" />
+            <span class="input-group-addon">
+                <a id="btn_generateURL"><i class="fa fa-sign-out" aria-hidden="true"></i> Generate url</a>
+            </span>
+            @Html.ValidationMessageFor(model => model.TagURL, "", new { @class = "text-danger" })
+        </div>
+        @Html.HiddenFor(model => model.TagURL, new { @class = "hdnURL" })
+        <div class="anchorShowURL">
+            @Model.TagURL
+        </div>
+    </div>
+
+    
+
+    <div class="col-lg-12">
+
+        @if (Model.BlogTagID > 0)
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+        }
+
+    </div>
+</div>
+}
+
+

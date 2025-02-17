@@ -1,0 +1,84 @@
+﻿@model IList<Blog.Web>
+@{
+    List<Blog.Web> PopularList = new List<Blog.Web>();
+    List<Blog.Web> LatestList = new List<Blog.Web>();
+    if (Model.Where(x => x.LikeCount > 0).Count() > 0)
+    {
+        PopularList = Model.Where(x => x.LikeCount > 0).OrderByDescending(x => x.LikeCount).ToList();
+    }
+    if (Model.Count() > 0)
+    {
+        LatestList = Model.OrderByDescending(x => x.PublishedDate).ToList();
+    }
+}
+<div class="card pt-0 text-center mb-4" id="sidebar">
+
+    <ul class="nav nav-tabs sv-tab tab-list" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Popular</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Latest</a>
+        </li>
+
+    </ul>
+    <div class="tab-content sv-tab-content">
+        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+
+            @if (PopularList.Count > 0)
+            {
+                <ul class="list-unstyled">
+                    @foreach (var item in PopularList)
+                    {
+                        <li class="worldview-list d-flex align-items-center">
+                            <a href="/@item.TypeURL/@item.BlogURL">
+                                <img src="@item.ListImageURL" class="br-0" />
+                            </a>
+                            <div class="worldview-text">
+                                <a href="/@item.TypeURL/@item.BlogURL">@item.Heading</a>
+                                <div class="linkarow">
+                                    <a href="/@item.TypeURL/@item.BlogURL" class="article-Button">
+                                        <i class="fas fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+            }
+        </div>
+
+
+
+        <div class="tab-pane" id="tabs-2" role="tabpanel">
+            @if (LatestList.Count > 0)
+            {
+                <ul class="list-unstyled">
+                    @foreach (var item in LatestList)
+                    {
+                        <li class="worldview-list d-flex align-items-center">
+                            <a href="/@item.TypeURL/@item.BlogURL">
+                                <img src="@item.ListImageURL" class="br-0" />
+                            </a>
+                            <div class="worldview-text">
+                                <a href="/@item.TypeURL/@item.BlogURL">@item.Heading</a>
+                                <div class="linkarow">
+                                    <a href="/@item.TypeURL/@item.BlogURL" class="article-Button">
+                                        <i class="fas fa-angle-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    }
+
+                </ul>
+            }
+        </div>
+
+    </div>
+
+
+
+</div>
+

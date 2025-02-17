@@ -1,0 +1,26 @@
+﻿@model IList<Web_ProCMS.Models.ExternalLinks>
+@using Web_ProCMS.Models
+<h1 class="heading-m text-center">
+    @Html.CreateImage("heart-icon.png", "heart-icon", "headingicon")Worldview on safe sex </h1>
+   
+    <div class="row">
+        @foreach (var item in Model)
+        {
+          <div class="col-sm-4">
+			<li class="worldview-list mb-4 bm-0  d-flex align-items-center">
+                <a href="@item.LinkURL" target="_blank">
+                    @Html.ShowDocument(item.DocID.ToString(), "")
+                </a>
+                <div class="worldview-text w-ato">
+                    <a href="@item.LinkURL" target="_blank">
+                        <strong>@item.LinkName</strong>
+                    </a>
+					
+                   
+                </div>
+            </li>
+		  </div>
+        }
+    </div>
+
+

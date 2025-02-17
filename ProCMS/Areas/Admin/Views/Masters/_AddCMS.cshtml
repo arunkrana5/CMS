@@ -1,0 +1,48 @@
+﻿
+@model CMS.Add
+
+@using (Ajax.BeginForm("_AddCMS", "Masters",
+        new { src = ViewBag.src },
+         new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnBegin = "ShowLoadingDialog()" },
+            new { @id = "_AddCMSForm" })
+    )
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => Model.CMSID)
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+            <label>Heading<sup>*</sup></label>
+            @Html.TextBoxFor(model => model.Heading, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Heading, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="col-lg-6 col-md-6 col-sm-6 form-group">
+            <label>Page URL<sup>*</sup></label>
+            <div class="input-group">
+                <input type="text" tag-value="@clsCommon.Encrypt("CMS")" tag-id="@Model.CMSID" name="txtURL" id="txtURL" value="@Model.PageURL" class="form-control" />
+                <span class="input-group-addon">
+                    <a id="btn_generateURL"><i class="fa fa-sign-out" aria-hidden="true"></i> Generate url</a>
+                </span>
+                @Html.ValidationMessageFor(model => model.PageURL, "", new { @class = "text-danger" })
+            </div>
+            @Html.HiddenFor(model => model.PageURL, new { @class = "hdnURL" })
+            <div class="anchorShowURL">
+                @Model.PageURL
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        @if (Model.CMSID > 0)
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Update</button>
+        }
+        else
+        {
+            <button type="submit" class="btn mtr-o-grn btn-l ripplelink pull-right" name="Command" value="Add"><i class="fa fa-paper-plane" aria-hidden="true"></i> Submit</button>
+        }
+    </div>
+}
+

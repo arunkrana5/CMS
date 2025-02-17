@@ -1,0 +1,29 @@
+﻿
+@model IList<Product.Web>
+
+@foreach (var item in Model)
+{
+
+
+	<div class="col-lg-3 col-md-6">
+		<div class="boxshadow card rounded box" id="boxshadow">
+			<div class="card-image bounceInLeft">
+                <a href="/PD/@item.ProductURL">
+                    @if (item.ProductImagesList != null)
+                    {
+                        <img src="@item.ProductImagesList.Where(x=>x.IsDefault).Select(x=>x.ImageURL).FirstOrDefault()" alt="@item.ProductImagesList.Where(x=>x.IsDefault).Select(x=>x.ImageName).FirstOrDefault()">
+                    }
+                    <span class="shj-c">@item.ProductHeading</span>
+                </a>
+			</div>
+
+			<div class="card-body text-left p-0">
+				<p>@item.ProductShortDescription</p>
+				<div class="boxshadow-btn">
+					<a class="shj-c-bg white-clr" href="/PD/@item.ProductURL">Request a Demo</a>
+					<a href="/PD/@item.ProductURL">Read More</a>
+				</div>
+			</div>
+		</div>
+	</div>
+}

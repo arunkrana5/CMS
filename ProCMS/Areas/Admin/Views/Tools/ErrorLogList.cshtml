@@ -1,0 +1,151 @@
+﻿
+@model IList<ErrorLog>
+
+@{
+    string DesignKey = "design" + clsApplicationSetting.GetWebConfigValue("DesignKey") + "/";
+    string Prefix = "/Areas/Admin/assets/";
+}
+
+@section style{
+    @Html.IncludeVersionedCss(Url.Content(Prefix + "vendors/datatables/dataTables.bootstrap4.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + "vendors/datatables/buttons.bootstrap4.min.css"))
+    @Html.IncludeVersionedCss(Url.Content(Prefix + "vendors/datatables/responsive.bootstrap4.min.css"))
+}
+
+@using (Html.BeginForm("ErrorLogList", "Tools",
+      new { src = ViewBag.src }, FormMethod.Post,
+      new { id = "ErrorLogListFrom", enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="card m-b-20">
+                <div class="card-body p-0">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h4 class="heading-one m-0">Error Log List</h4>
+                        </div>
+
+                        <div class="col-sm-7 text-right">
+                            <button type="submit" name="Command" value="Delete" onclick="return Validate()" class="btn mtr-r-grn ripplelink pull-right"><i class="fas fa-trash-alt"></i> Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="x_content table-currency tbl-are ">
+
+                        <div class="table-responsive">
+                            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap tbltick new_width" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th>S.no.</th>
+                                        <th>
+                                            <input type="checkbox" class="newwidth" id="checkAll" onclick="chkAll();" name="ChkAll" value="All" />
+                                            <label for="checkAll"></label>
+                                        </th>
+                                        <th>Description</th>
+                                        <th>System Exception</th>
+                                        <th>Active Function</th>
+                                        <th>Active Form</th>
+                                        <th>Active Module</th>
+                                        <th>Logged At</th>
+                                        <th>IP Address</th>
+                                    </tr>
+                                    <tr class="searchbar">
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th class="searchhide"></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ int Count = 0;}
+                                    @foreach (ErrorLog item in Model)
+                                    {
+                                        Count++;
+                                        <tr>
+                                            <td>@Count</td>
+                                            <td>
+                                                <input type="checkbox" class="newwidth" id="Chksingle_@item.ID" name="Chksingle" value="@item.ID" />
+                                                <label for="Chksingle_@item.ID"></label>
+                                            </td>
+                                            <td><textarea class="form-control"> @item.ErrorDescription</textarea></td>
+                                            <td><textarea class="form-control">@item.SystemException</textarea></td>
+                                            <td><textarea class="form-control">@item.ActiveFunction</textarea></td>
+                                            <td><textarea class="form-control">@item.ActiveForm</textarea></td>
+                                            <td><textarea class="form-control">@item.ActiveModule</textarea></td>
+                                            <td>@item.LoggedAt</td>
+                                            <td>@item.IPAddress</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+
+@section scripts    {
+
+
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/jquery.dataTables.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/dataTables.bootstrap4.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/dataTables.buttons.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.bootstrap4.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/jszip.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/pdfmake.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/vfs_fonts.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.html5.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.print.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "vendors/datatables/buttons.colVis.min.js"))
+    @Html.IncludeVersionedJs(Url.Content(Prefix + "scripts/ListSetting.js"))
+    <script>
+
+        function chkAll() {
+            var checkAll = $("#checkAll").is(":checked");
+            if (checkAll) {
+                $("input[name=Chksingle]").each(function () {
+                    $(this).prop('checked', true)
+                });
+            }
+            else {
+                $("input[name=Chksingle]").each(function () {
+                    $(this).prop('checked', false)
+                });
+            }
+        }
+
+        function Validate() {
+
+            var retunr = false;
+            var count = 0;
+            var checkAll = $("#checkAll").is(":checked");
+
+            $("input[name=Chksingle]").each(function () {
+                if ($(this).prop('checked') == true) {
+                    count++;
+                }
+            });
+
+            if (!checkAll && count == 0) {
+                swal("kindly select atleast one record", '')
+            }
+            else {
+
+                retunr = true;
+            }
+            return retunr;
+
+        }
+    </script>
+
+
+}
